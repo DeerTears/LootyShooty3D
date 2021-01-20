@@ -1,0 +1,89 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://actors/components/item_body.gd" type="Script" id=1]
+[ext_resource path="res://particles/images/effect1.png" type="Texture" id=2]
+[ext_resource path="res://particles/images/dingbats-265.png" type="Texture" id=3]
+[ext_resource path="res://particles/images/dingbats-266.png" type="Texture" id=4]
+[ext_resource path="res://items/guns/great_shotgun.tres" type="Resource" id=5]
+
+[sub_resource type="BoxShape" id=1]
+
+[sub_resource type="ParticlesMaterial" id=2]
+render_priority = 6
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+scale = 3.0
+
+[sub_resource type="SpatialMaterial" id=3]
+flags_transparent = true
+flags_unshaded = true
+flags_no_depth_test = true
+vertex_color_use_as_albedo = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 3 )
+uv1_offset = Vector3( 0.05, 0.05, 0 )
+
+[sub_resource type="QuadMesh" id=4]
+material = SubResource( 3 )
+
+[sub_resource type="SpatialMaterial" id=5]
+flags_transparent = true
+flags_unshaded = true
+flags_no_depth_test = true
+vertex_color_use_as_albedo = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 4 )
+uv1_offset = Vector3( -0.05, -0.05, 0 )
+
+[sub_resource type="QuadMesh" id=6]
+material = SubResource( 5 )
+
+[sub_resource type="SphereMesh" id=7]
+radial_segments = 4
+rings = 2
+
+[node name="ItemBody" type="RigidBody"]
+collision_layer = 4
+mode = 2
+gravity_scale = 2.0
+script = ExtResource( 1 )
+gun_resource = ExtResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
+
+[node name="Trail" type="Sprite3D" parent="."]
+offset = Vector2( 0, 190 )
+billboard = 2
+double_sided = false
+texture = ExtResource( 2 )
+
+[node name="SelectParticle" type="Particles" parent="."]
+amount = 1
+lifetime = 0.25
+process_material = SubResource( 2 )
+draw_passes = 2
+draw_pass_1 = SubResource( 4 )
+draw_pass_2 = SubResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Mesh" type="Spatial" parent="."]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="DefaultMesh" type="MeshInstance" parent="Mesh"]
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="ReselectDowntime" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+[connection signal="timeout" from="ReselectDowntime" to="." method="_on_ReselectDowntime_timeout"]

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://definitions/scripts/scaling.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+white_threshold = 0.3
+green_threshold = 0.5
+blue_threshold = 0.7
+purple_threshold = 0.9
+orange_threshold = 0.975
