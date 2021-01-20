@@ -1,0 +1,8 @@
+{
+	"contains_albedo": false,
+	"resolution": 512,
+	"src": {
+		"a": "res://materials/Lava/stylized_lava_cracked_Roughness.png",
+		"rgb": "res://materials/Lava/stylized_lava_cracked_Normal.png"
+	}
+}
