@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://weapons/abstract/WeaponPistol.gd" type="Script" id=1]
 [ext_resource path="res://weapons/interfaces/WeaponHandler.gd" type="Script" id=2]
 [ext_resource path="res://weapons/WeaponShotgun.gd" type="Script" id=3]
 [ext_resource path="res://weapons/WeaponSMG.gd" type="Script" id=4]
+[ext_resource path="res://weapons/WeaponSniper.gd" type="Script" id=5]
 
 [node name="WeaponHandler" type="Spatial"]
 script = ExtResource( 2 )
@@ -18,8 +19,30 @@ script = ExtResource( 3 )
 script = ExtResource( 4 )
 
 [node name="WeaponSniper" type="Spatial" parent="."]
-
-[node name="WeaponRifle" type="Spatial" parent="."]
+script = ExtResource( 5 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 2, 4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4 )
+
+[node name="FirerateTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="SwapTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+margin_bottom = 88.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "warwarwar"
+align = 1
+valign = 1
+[connection signal="timeout" from="FirerateTimer" to="." method="_on_FirerateTimer_timeout"]
+[connection signal="timeout" from="SwapTimer" to="." method="_on_SwapTimer_timeout"]

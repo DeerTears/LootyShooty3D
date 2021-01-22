@@ -73,7 +73,7 @@ func _input(event):
 		drop_gun()
 
 func drop_gun():
-	var new_gun = load("res://weapons/components/item_body.tscn").instance()
+	var new_gun = load("res://weapons/components/ItemBody.tscn").instance()
 	new_gun.global_transform = self.global_transform
 	new_gun.drop_trajectory = -transform.basis.z
 	new_gun.gun_resource = load(meta.gunlist[randi() % meta.gunlist.size() - 1])
