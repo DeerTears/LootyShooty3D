@@ -1,21 +1,23 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://actors/components/item_body.gd" type="Script" id=1]
+[ext_resource path="res://weapons/components/ItemBody.gd" type="Script" id=1]
 [ext_resource path="res://particles/images/effect1.png" type="Texture" id=2]
 [ext_resource path="res://particles/images/dingbats-265.png" type="Texture" id=3]
 [ext_resource path="res://particles/images/dingbats-266.png" type="Texture" id=4]
 [ext_resource path="res://items/guns/great_shotgun.tres" type="Resource" id=5]
 
+
+
 [sub_resource type="BoxShape" id=1]
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticlesMaterial" id=5]
 render_priority = 6
 direction = Vector3( 0, 1, 0 )
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
 scale = 3.0
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=6]
 flags_transparent = true
 flags_unshaded = true
 flags_no_depth_test = true
@@ -27,10 +29,10 @@ particles_anim_loop = false
 albedo_texture = ExtResource( 3 )
 uv1_offset = Vector3( 0.05, 0.05, 0 )
 
-[sub_resource type="QuadMesh" id=4]
-material = SubResource( 3 )
+[sub_resource type="QuadMesh" id=7]
+material = SubResource( 6 )
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=8]
 flags_transparent = true
 flags_unshaded = true
 flags_no_depth_test = true
@@ -42,10 +44,10 @@ particles_anim_loop = false
 albedo_texture = ExtResource( 4 )
 uv1_offset = Vector3( -0.05, -0.05, 0 )
 
-[sub_resource type="QuadMesh" id=6]
-material = SubResource( 5 )
+[sub_resource type="QuadMesh" id=9]
+material = SubResource( 8 )
 
-[sub_resource type="SphereMesh" id=7]
+[sub_resource type="SphereMesh" id=10]
 radial_segments = 4
 rings = 2
 
@@ -66,12 +68,13 @@ double_sided = false
 texture = ExtResource( 2 )
 
 [node name="SelectParticle" type="Particles" parent="."]
+visible = false
 amount = 1
 lifetime = 0.25
-process_material = SubResource( 2 )
+process_material = SubResource( 5 )
 draw_passes = 2
-draw_pass_1 = SubResource( 4 )
-draw_pass_2 = SubResource( 6 )
+draw_pass_1 = SubResource( 7 )
+draw_pass_2 = SubResource( 9 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -80,7 +83,7 @@ __meta__ = {
 transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="DefaultMesh" type="MeshInstance" parent="Mesh"]
-mesh = SubResource( 7 )
+mesh = SubResource( 10 )
 material/0 = null
 
 [node name="ReselectDowntime" type="Timer" parent="."]

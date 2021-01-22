@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/effect1.png-2f7a853628ae5e6c38367b52a156c36c.s3tc.stex"
-path.etc2="res://.import/effect1.png-2f7a853628ae5e6c38367b52a156c36c.etc2.stex"
+path.s3tc="res://.import/centered.png-2454350142d316ebba1813aae410c13c.s3tc.stex"
+path.etc2="res://.import/centered.png-2454350142d316ebba1813aae410c13c.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://particles/images/effect1.png"
-dest_files=[ "res://.import/effect1.png-2f7a853628ae5e6c38367b52a156c36c.s3tc.stex", "res://.import/effect1.png-2f7a853628ae5e6c38367b52a156c36c.etc2.stex" ]
+source_file="res://particles/muzzleflash/centered.png"
+dest_files=[ "res://.import/centered.png-2454350142d316ebba1813aae410c13c.s3tc.stex", "res://.import/centered.png-2454350142d316ebba1813aae410c13c.etc2.stex" ]
 
 [params]
 

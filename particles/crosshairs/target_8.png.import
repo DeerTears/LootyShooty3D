@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/target_7.png-a1187e0114ea95b9227713169ff42c2c.stex"
+path="res://.import/target_8.png-5943e04105f5b2f31a11832b335735dc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://guns/crosshairs/target_7.png"
-dest_files=[ "res://.import/target_7.png-a1187e0114ea95b9227713169ff42c2c.stex" ]
+source_file="res://particles/crosshairs/target_8.png"
+dest_files=[ "res://.import/target_8.png-5943e04105f5b2f31a11832b335735dc.stex" ]
 
 [params]
 

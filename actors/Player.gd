@@ -56,6 +56,7 @@ func _input(event):
 		rotate_y(deg2rad(-event.relative.x * mouse_sensitivity))
 		head.rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
 		head.rotation.x = clamp(head.rotation.x, deg2rad(-89), deg2rad(89))
+		$Control/Debug/Label.text = "%s\n%s" % [head.rotation, head.rotation.x]
 	if Input.is_action_just_pressed("fire"):
 		$Head/Pistol.automatic_fire = true
 	if Input.is_action_just_released("fire"):
@@ -66,17 +67,17 @@ func _input(event):
 		else:
 			OS.window_fullscreen = true
 	if event.is_action_pressed("drop"):
-		#$Head/GunDropper.direction = -transform.basis.z
-		$Head/GunDropper.drop_random_gun()
-#		drop_gun()
+		# bug: guns roll with player pitch view, messes up particles, really annoying, makes no sense
+#		$Head/GunDropper.direction = -transform.basis.z
+#		$Head/GunDropper.drop_random_gun()
+		drop_gun()
 
-#func drop_gun():
-#	var new_gun = load("res://actors/components/item_body.tscn").instance()
-#	new_gun.global_transform = self.global_transform
-#	new_gun.drop_trajectory = -transform.basis.z
-#	new_gun.gun_resource = load(meta.gunlist[randi() % meta.gunlist.size() - 1])
-#	get_tree().root.add_child(new_gun)
-
+func drop_gun():
+	var new_gun = load("res://weapons/components/item_body.tscn").instance()
+	new_gun.global_transform = self.global_transform
+	new_gun.drop_trajectory = -transform.basis.z
+	new_gun.gun_resource = load(meta.gunlist[randi() % meta.gunlist.size() - 1])
+	get_tree().root.add_child(new_gun)
 
 func _physics_process(delta):
 	direction = Vector3()

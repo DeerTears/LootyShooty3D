@@ -9,7 +9,6 @@ var downtime_active: bool = false
 
 func _ready():
 	set_downtime_active(true)
-	rotation_degrees.y += rand_range(0.0,360.0)
 	drop_facing(drop_trajectory)
 	check_gun_resource()
 

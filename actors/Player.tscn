@@ -2,9 +2,10 @@
 
 [ext_resource path="res://actors/Player.gd" type="Script" id=1]
 [ext_resource path="res://models/pistol/pistol.tscn" type="PackedScene" id=2]
-[ext_resource path="res://guns/PistolCode.tscn" type="PackedScene" id=3]
-[ext_resource path="res://guns/crosshairs/target_6.png" type="Texture" id=4]
-[ext_resource path="res://actors/components/GunDropper.tscn" type="PackedScene" id=5]
+[ext_resource path="res://weapons/components/PistolCode.tscn" type="PackedScene" id=3]
+[ext_resource path="res://particles/crosshairs/target_6.png" type="Texture" id=4]
+[ext_resource path="res://weapons/components/GunDropper.tscn" type="PackedScene" id=5]
+
 
 [sub_resource type="CapsuleMesh" id=1]
 mid_height = 3.0
@@ -123,6 +124,7 @@ shape = SubResource( 2 )
 
 [node name="CollisionFoot" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0 )
+visible = false
 shape = SubResource( 3 )
 
 [node name="Head" type="Spatial" parent="."]
@@ -213,6 +215,23 @@ rect_min_size = Vector2( 48, 48 )
 texture = ExtResource( 4 )
 expand = true
 stretch_mode = 5
+
+[node name="Debug" type="PanelContainer" parent="Control"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -45.0
+margin_right = 138.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/Debug"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 259.0
+margin_bottom = 38.0
+text = "stuff stuff stuff stuff stuff stuff stuff stuff
+stuff stuff stuff stuff stuff stuff stuff stuff"
 [connection signal="animation_finished" from="Head/Camera/Animations" to="." method="_on_Animations_animation_finished"]
 [connection signal="shoot" from="Head/Pistol" to="." method="_on_Pistol_shoot"]
 [connection signal="body_entered" from="PickupArea" to="." method="_on_PickupArea_body_entered"]

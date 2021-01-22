@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://weapons/components/BulletEmitter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://weapons/components/PistolCode.gd" type="Script" id=2]
+
+[node name="PistolCode" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="FirerateTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="Emitters" type="Spatial" parent="."]
+
+[node name="BulletEmitter" parent="Emitters" instance=ExtResource( 1 )]

@@ -1,6 +1,6 @@
 extends KinematicBody
 
-var health = 1
+var health = 100
 var max_health = 100
 var velocity = Vector3()
 
@@ -12,7 +12,6 @@ func hurt(damage:int):
 	print("we're hit!")
 	if health <= 0:
 		die()
-		$GunDropper.drop_random_gun()
 #		var new_gun = load("res://actors/components/item_body.tscn").instance()
 #		new_gun.global_transform = self.global_transform
 #		new_gun.drop_trajectory = -transform.basis.z
@@ -20,6 +19,9 @@ func hurt(damage:int):
 #		get_tree().root.add_child(new_gun)
 
 func die():
+	if 1 == 1: # todo: if we should drop a gun...
+		$GunDropper.direction = -transform.basis.z
+		$GunDropper.drop_random_gun()
 	queue_free()
 
 func _physics_process(_delta):
