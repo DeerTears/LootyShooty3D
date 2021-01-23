@@ -57,10 +57,6 @@ func _input(event):
 		head.rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
 		head.rotation.x = clamp(head.rotation.x, deg2rad(-89), deg2rad(89))
 		$Control/Debug/Label.text = "%s\n%s" % [head.rotation, head.rotation.x]
-	if Input.is_action_just_pressed("fire"):
-		$Head/Pistol.automatic_fire = true
-	if Input.is_action_just_released("fire"):
-		$Head/Pistol.automatic_fire = false
 	if event.is_action_pressed("ui_cancel"):
 		if OS.window_fullscreen:
 			OS.window_fullscreen = false
@@ -111,9 +107,7 @@ func _physics_process(delta):
 	move_and_slide(movement, Vector3.UP)
 
 
-func _on_Pistol_shoot(wait_time:float):
-	$Head/Camera/Animations.playback_speed = inverse_lerp(2.1,0.001,wait_time) # todo: regular lerp this or something?
-	$Head/Camera/Animations.play("Fire")
+#$Head/Camera/Animations.play("Fire")
 
 
 func _on_Animations_animation_finished(anim_name):
@@ -122,3 +116,13 @@ func _on_Animations_animation_finished(anim_name):
 			$Head/Camera/Animations.play("Idle")
 		"Ready":
 			$Head/Camera/Animations.play("Idle")
+
+
+func on_weapon_fired(weapon_name:String,total_time_for_animation_to_complete:float):
+	match weapon_name:
+		"Pistol":
+			$Head/Camera/Animations.play("Fire")
+		"Shotgun":
+			pass
+	
+	print("%s, %s" % [weapon_name, total_time_for_animation_to_complete])

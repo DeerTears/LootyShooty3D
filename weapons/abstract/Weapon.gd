@@ -13,7 +13,7 @@ func shoot(): # refactor opportunity: make this function an inheritable behaviou
 		return
 	for i in get_child_count(): # BulletEmitters are the only children of WeaponClasses
 		var current_child = get_child(i) # get all bullet emitters
-		get_child(i).shoot() # shoot them each individually
+		current_child.shoot() # shoot them each individually
 		# note: BulletEmitters handle accuracy/damage on their own, passed down by the various "update_" functions later in this script
 
 func get_pellets() -> Array: # a function that turns the pellet count into an array of BulletEmitter scenes, ready to be added as children

@@ -1,12 +1,11 @@
 extends Node
 
 # args: (weapon_suffix:String, wait_time:float)
-signal swapping # helpful for connecting swapping animations
-signal firing # helpful for connecting shooting animations
+signal swapped # for connecting weapon swap animations
+signal fired # for connecting shoot animations
 
 # args: (weapon_suffix:String)
-signal finished_swapping # ideally for debugging/bruteforcing swapping animations
-signal finished_firing # ideally for debugging/bruteforcing shooting animations
+signal gun_should_be_idle # for debugging/bruteforcing swapped animations
 
 enum weapon_idx { # our scrollable list of weapons
 	PISTOL,
@@ -49,8 +48,8 @@ func _input(event):
 			holding_idx = weapon_idx.SNIPER
 	if old_holding_idx != holding_idx:
 		current_weapon = get_node("Weapon%s" % [weapon_names[holding_idx]])
-		emit_signal("swapping", weapon_names[holding_idx], swap_timer.wait_time)
-		print_debug("swapping to %s" % [current_weapon.name])
+		emit_signal("swapped", weapon_names[holding_idx], swap_timer.wait_time)
+		print_debug("swapped to %s" % [current_weapon.name])
 		swap_timer.wait_time = current_weapon.swap_time
 		swap_timer.start()
 		firerate_timer.wait_time = current_weapon.firerate
@@ -60,11 +59,13 @@ func _physics_process(_delta):
 	if Input.is_action_pressed("fire") and firerate_timer.is_stopped() and swap_timer.is_stopped():
 			current_weapon.shoot()
 			firerate_timer.start()
-			emit_signal("firing", weapon_names[holding_idx], firerate_timer.wait_time)
+			emit_signal("fired", weapon_names[holding_idx], firerate_timer.wait_time)
 	$Panel/Label.text = "%s\n%s" % [firerate_timer.time_left, swap_timer.time_left]
 
 func _on_SwapTimer_timeout():
-	emit_signal("finished_swapping", weapon_names[holding_idx])
+	if firerate_timer.is_stopped():
+		emit_signal("gun_should_be_idle", weapon_names[holding_idx])
 
 func _on_FirerateTimer_timeout():
-	emit_signal("finished_firing", weapon_names[holding_idx])
+	if swap_timer.is_stopped():
+		emit_signal("gun_should_be_idle", weapon_names[holding_idx])

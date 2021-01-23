@@ -2,7 +2,7 @@
 
 [ext_resource path="res://actors/Player.gd" type="Script" id=1]
 [ext_resource path="res://models/pistol/pistol.tscn" type="PackedScene" id=2]
-[ext_resource path="res://weapons/components/PistolCode.tscn" type="PackedScene" id=3]
+[ext_resource path="res://weapons/components/WeaponHandler.tscn" type="PackedScene" id=3]
 [ext_resource path="res://particles/crosshairs/target_6.png" type="Texture" id=4]
 [ext_resource path="res://weapons/components/GunDropper.tscn" type="PackedScene" id=5]
 
@@ -140,6 +140,7 @@ transform = Transform( -0.1, 0, 3.25841e-08, 0, 0.1, 0, -3.25841e-08, 0, -0.1, 0
 
 [node name="Animations" type="AnimationPlayer" parent="Head/Camera"]
 autoplay = "Ready"
+playback_speed = 2.0
 anims/Fire = SubResource( 4 )
 anims/Idle = SubResource( 5 )
 anims/Ready = SubResource( 6 )
@@ -149,7 +150,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.25, 0 )
 remote_path = NodePath("../../GunDropper")
 update_scale = false
 
-[node name="Pistol" parent="Head" instance=ExtResource( 3 )]
+[node name="WeaponHandler" parent="Head/Camera" instance=ExtResource( 3 )]
 
 [node name="EditorArrow" type="MeshInstance" parent="Head"]
 transform = Transform( 1, 0, 0, 0, 0.0871556, 0.996195, 0, -0.996195, 0.0871556, 0, -0.25, -3 )
@@ -232,6 +233,6 @@ margin_bottom = 38.0
 text = "stuff stuff stuff stuff stuff stuff stuff stuff
 stuff stuff stuff stuff stuff stuff stuff stuff"
 [connection signal="animation_finished" from="Head/Camera/Animations" to="." method="_on_Animations_animation_finished"]
-[connection signal="shoot" from="Head/Pistol" to="." method="_on_Pistol_shoot"]
+[connection signal="fired" from="Head/Camera/WeaponHandler" to="." method="on_weapon_fired"]
 [connection signal="body_entered" from="PickupArea" to="." method="_on_PickupArea_body_entered"]
 [connection signal="body_exited" from="PickupArea" to="." method="_on_PickupArea_body_exited"]

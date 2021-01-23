@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://weapons/abstract/WeaponPistol.gd" type="Script" id=1]
+[ext_resource path="res://weapons/WeaponPistol.gd" type="Script" id=1]
 [ext_resource path="res://weapons/interfaces/WeaponHandler.gd" type="Script" id=2]
 [ext_resource path="res://weapons/WeaponShotgun.gd" type="Script" id=3]
 [ext_resource path="res://weapons/WeaponSMG.gd" type="Script" id=4]
@@ -21,9 +21,6 @@ script = ExtResource( 4 )
 [node name="WeaponSniper" type="Spatial" parent="."]
 script = ExtResource( 5 )
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4 )
-
 [node name="FirerateTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
@@ -32,8 +29,10 @@ one_shot = true
 one_shot = true
 
 [node name="Panel" type="Panel" parent="."]
+anchor_left = 1.0
 anchor_right = 1.0
-margin_bottom = 88.0
+margin_left = -182.0
+margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -44,5 +43,8 @@ anchor_bottom = 1.0
 text = "warwarwar"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="timeout" from="FirerateTimer" to="." method="_on_FirerateTimer_timeout"]
 [connection signal="timeout" from="SwapTimer" to="." method="_on_SwapTimer_timeout"]
