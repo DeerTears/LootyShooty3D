@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/tail3.png-f710e0d19f2653c7d6051ecff1ae5e20.s3tc.stex"
-path.etc2="res://.import/tail3.png-f710e0d19f2653c7d6051ecff1ae5e20.etc2.stex"
+path.s3tc="res://.import/ExplosionFog-Texture-2.png-2290e32ccfc7a97fd52a9104f92a1aac.s3tc.stex"
+path.etc2="res://.import/ExplosionFog-Texture-2.png-2290e32ccfc7a97fd52a9104f92a1aac.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://particles/loot/tail3.png"
-dest_files=[ "res://.import/tail3.png-f710e0d19f2653c7d6051ecff1ae5e20.s3tc.stex", "res://.import/tail3.png-f710e0d19f2653c7d6051ecff1ae5e20.etc2.stex" ]
+source_file="res://particles/smoke/ExplosionFog-Texture-2.png"
+dest_files=[ "res://.import/ExplosionFog-Texture-2.png-2290e32ccfc7a97fd52a9104f92a1aac.s3tc.stex", "res://.import/ExplosionFog-Texture-2.png-2290e32ccfc7a97fd52a9104f92a1aac.etc2.stex" ]
 
 [params]
 

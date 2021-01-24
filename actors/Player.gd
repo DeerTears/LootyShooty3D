@@ -1,30 +1,27 @@
-extends KinematicBody
+extends Actor
 
 # selecting and picking guns
 var new_item_selected
-export(Resource) var gun_resource
 
 # character controller
-var speed = 22
 var h_acceleration = 3
 var air_acceleration = 1
 var normal_acceleration = 7
 var gravity = 26
 var jump = 18
 var full_contact = false
+var alive: bool = true
 
 onready var pickup_notice = $Control/CenterContainer/PickupNotice
 export var mouse_sensitivity = 0.15
 
-var direction = Vector3()
 var h_velocity = Vector3()
-var movement = Vector3()
-var gravity_vec = Vector3()
 
 onready var head = $Head
 onready var ground_check = $GroundCheck
 
 func _ready():
+	speed = 22
 	$Head/EditorArrow.hide()
 	$Control/CenterContainer/PickupNotice.hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -47,7 +44,6 @@ func _on_PickupArea_body_entered(body):
 
 func _on_PickupArea_body_exited(body):
 	if "gun_resource" in body:
-#		body.drop_facing(-transform.basis.z)
 		body.select(false)
 		pickup_notice.hide()
 
@@ -56,12 +52,13 @@ func _input(event):
 		rotate_y(deg2rad(-event.relative.x * mouse_sensitivity))
 		head.rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
 		head.rotation.x = clamp(head.rotation.x, deg2rad(-89), deg2rad(89))
-		$Control/Debug/Label.text = "%s\n%s" % [head.rotation, head.rotation.x]
 	if event.is_action_pressed("ui_cancel"):
 		if OS.window_fullscreen:
 			OS.window_fullscreen = false
 		else:
 			OS.window_fullscreen = true
+	if not alive:
+		return
 	if event.is_action_pressed("drop"):
 		# bug: guns roll with player pitch view, messes up particles, really annoying, makes no sense
 #		$Head/GunDropper.direction = -transform.basis.z
@@ -75,10 +72,19 @@ func drop_gun():
 	new_gun.gun_resource = load(meta.gunlist[randi() % meta.gunlist.size() - 1])
 	get_tree().root.add_child(new_gun)
 
+func hurt(damage:int):
+	health -= damage
+	print("I got hit for %s!" % [damage])
+	$Control/Effects/AnimationPlayer.play("Hurt")
+	if health <= 0:
+		die()
+
+func die():
+	queue_free()
+
 func _physics_process(delta):
 	direction = Vector3()
 	full_contact = ground_check.is_colliding()
-	
 	if not is_on_floor():
 		gravity_vec += Vector3.DOWN * gravity * delta
 		h_acceleration = air_acceleration
@@ -88,7 +94,6 @@ func _physics_process(delta):
 	else:
 		gravity_vec = -get_floor_normal()
 		h_acceleration = normal_acceleration
-		
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or ground_check.is_colliding()):
 		gravity_vec = Vector3.UP * jump
 	if Input.is_action_pressed("move_forward"):
@@ -99,30 +104,60 @@ func _physics_process(delta):
 		direction -= transform.basis.x
 	elif Input.is_action_pressed("move_right"):
 		direction += transform.basis.x
+	if not alive:
+		direction = Vector3.ZERO
 	direction = direction.normalized()
 	h_velocity = h_velocity.linear_interpolate(direction * speed, h_acceleration * delta)
-	movement.z = h_velocity.z + gravity_vec.z
-	movement.x = h_velocity.x + gravity_vec.x
-	movement.y = gravity_vec.y
-	move_and_slide(movement, Vector3.UP)
-
-
-#$Head/Camera/Animations.play("Fire")
+	velocity.z = h_velocity.z + gravity_vec.z
+	velocity.x = h_velocity.x + gravity_vec.x
+	velocity.y = gravity_vec.y
+	move_and_slide(velocity, Vector3.UP)
+	GameInfo.player_position = global_transform.origin
 
 
 func _on_Animations_animation_finished(anim_name):
-	match anim_name:
-		"Fire":
-			$Head/Camera/Animations.play("Idle")
-		"Ready":
-			$Head/Camera/Animations.play("Idle")
+	pass	
+#	match anim_name:
+#		"ReadyPistol":
+#			$Head/Camera/Animations.play("IdlePistol")
+#		"FirePistol":
+#			$Head/Camera/Animations.play("IdlePistol")
 
 
 func on_weapon_fired(weapon_name:String,total_time_for_animation_to_complete:float):
+	$Head/Camera/Animations.playback_speed = 1.0
 	match weapon_name:
 		"Pistol":
-			$Head/Camera/Animations.play("Fire")
+			$Head/Camera/Animations.stop()
+			$Head/Camera/Animations.play("FirePistol")
 		"Shotgun":
-			pass
-	
+			$Head/Camera/Animations.stop()
+			$Head/Camera/Animations.play("FirePistol")
+		"SMG":
+			$Head/Camera/Animations.stop()
+			$Head/Camera/Animations.play("FireSMG")
 	print("%s, %s" % [weapon_name, total_time_for_animation_to_complete])
+
+
+func on_weapon_swapped(weapon_name:String,total_time_for_animation_to_complete:float):
+	$Head/Camera/Viewmodel/PistolMesh.hide()
+	$Head/Camera/Viewmodel/ShotgunMesh.hide()
+	$Head/Camera/Viewmodel/SMGMesh.hide()
+	match weapon_name:
+		"Pistol":
+			$Head/Camera/Animations.stop()
+			$Head/Camera/Viewmodel/PistolMesh.show()
+			$Head/Camera/Animations.play("ReadyPistol")
+			$Head/Camera/Animations.playback_speed = 1.0
+		"Shotgun":
+			$Head/Camera/Animations.stop()
+			$Head/Camera/Viewmodel/ShotgunMesh.show()
+			$Head/Camera/Animations.play("ReadyPistol")
+			$Head/Camera/Animations.playback_speed = 0.6
+		"SMG":
+			$Head/Camera/Animations.stop()
+			$Head/Camera/Viewmodel/SMGMesh.show()
+			$Head/Camera/Animations.play("ReadyPistol")
+			$Head/Camera/Animations.playback_speed = 1.6
+		"Sniper":
+			pass

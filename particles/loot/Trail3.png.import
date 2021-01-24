@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/dingbats-265.png-97c52d7d5fcb676a4440698aee31bd18.s3tc.stex"
-path.etc2="res://.import/dingbats-265.png-97c52d7d5fcb676a4440698aee31bd18.etc2.stex"
+path.s3tc="res://.import/Trail3.png-005e1cf98b63a1e1be0a7577b046fdfd.s3tc.stex"
+path.etc2="res://.import/Trail3.png-005e1cf98b63a1e1be0a7577b046fdfd.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://particles/images/dingbats-265.png"
-dest_files=[ "res://.import/dingbats-265.png-97c52d7d5fcb676a4440698aee31bd18.s3tc.stex", "res://.import/dingbats-265.png-97c52d7d5fcb676a4440698aee31bd18.etc2.stex" ]
+source_file="res://particles/loot/Trail3.png"
+dest_files=[ "res://.import/Trail3.png-005e1cf98b63a1e1be0a7577b046fdfd.s3tc.stex", "res://.import/Trail3.png-005e1cf98b63a1e1be0a7577b046fdfd.etc2.stex" ]
 
 [params]
 

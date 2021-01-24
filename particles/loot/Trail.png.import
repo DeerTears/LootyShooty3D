@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/muzzle_flash_17.png-dc1377fb149b600a0743d14befb324da.s3tc.stex"
-path.etc2="res://.import/muzzle_flash_17.png-dc1377fb149b600a0743d14befb324da.etc2.stex"
+path.s3tc="res://.import/Trail.png-0b5755fcba4cd2053c2d1935456cc09b.s3tc.stex"
+path.etc2="res://.import/Trail.png-0b5755fcba4cd2053c2d1935456cc09b.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://particles/muzzleflash/muzzle_flash_17.png"
-dest_files=[ "res://.import/muzzle_flash_17.png-dc1377fb149b600a0743d14befb324da.s3tc.stex", "res://.import/muzzle_flash_17.png-dc1377fb149b600a0743d14befb324da.etc2.stex" ]
+source_file="res://particles/loot/Trail.png"
+dest_files=[ "res://.import/Trail.png-0b5755fcba4cd2053c2d1935456cc09b.s3tc.stex", "res://.import/Trail.png-0b5755fcba4cd2053c2d1935456cc09b.etc2.stex" ]
 
 [params]
 

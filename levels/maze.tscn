@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://actors/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://levels/LevelRootScript.gd" type="Script" id=2]
+
+[sub_resource type="Environment" id=2]
+background_mode = 1
+background_color = Color( 0.509804, 0.509804, 0.509804, 1 )
+tonemap_exposure = 1.2
+
+[sub_resource type="NavigationMesh" id=5]
+vertices = PoolVector3Array( -17.7, 2.4, -0.999999, -16.2, 2.4, -0.4, -16.2, 2.4, -2.5, -17.7, 2.4, -0.999999, -16.2, 2.4, -2.5, -15, 2.4, -4, -17.7, 2.4, -9.7, -15, 2.4, -4, -9.9, 2.4, -4.3, -9.9, 2.4, -9.7, -17.7, 2.4, -9.7, -7.8, 2.4, 2.6, -9.9, 2.4, 4.4, -9.9, 2.4, 9.8, 0, 2.4, 9.8, 9.9, 2.4, 9.8, 9.9, 2.4, 4.4, 7.8, 2.4, 2.6, 0, 2.4, 9.8, 7.8, 2.4, -2.5, 9.9, 2.4, -4.3, 9.9, 2.4, -9.7, 0, 2.4, -9.7, -9.9, 2.4, -9.7, -9.9, 2.4, -4.3, -7.8, 2.4, -2.5, 0, 2.4, -9.7, 7.8, 2.4, -2.5, 0, 2.4, -9.7, -7.8, 2.4, -2.5, -7.8, 2.4, 2.6, 0, 2.4, 9.8, 7.8, 2.4, 2.6, 16.2, 2.4, -2.5, 16.2, 2.4, 0.5, 17.7, 2.4, 1.1, 17.7, 2.4, -9.7, 15, 2.4, -4, 17.7, 2.4, -9.7, 9.9, 2.4, -9.7, 9.9, 2.4, -4.3, 15, 2.4, -4, 16.2, 2.4, -2.5, 17.7, 2.4, -9.7, -16.2, 2.4, 2.6, -16.2, 2.4, -0.4, -17.7, 2.4, -0.999999, -17.7, 2.4, 9.8, -9.9, 2.4, 9.8, -9.9, 2.4, 4.4, -15, 2.4, 4.1, -17.7, 2.4, 9.8, -15, 2.4, 4.1, -16.2, 2.4, 2.6, -17.7, 2.4, 9.8, 17.7, 2.4, 1.1, 16.2, 2.4, 0.5, 16.2, 2.4, 2.6, 17.7, 2.4, 1.1, 16.2, 2.4, 2.6, 15, 2.4, 4.1, 17.7, 2.4, 9.8, 9.9, 2.4, 9.8, 17.7, 2.4, 9.8, 15, 2.4, 4.1, 9.9, 2.4, 4.4 )
+polygons = [ PoolIntArray( 2, 1, 0 ), PoolIntArray( 4, 3, 5 ), PoolIntArray( 5, 3, 6 ), PoolIntArray( 8, 7, 9 ), PoolIntArray( 9, 7, 10 ), PoolIntArray( 12, 11, 13 ), PoolIntArray( 13, 11, 14 ), PoolIntArray( 16, 15, 17 ), PoolIntArray( 17, 15, 18 ), PoolIntArray( 20, 19, 21 ), PoolIntArray( 21, 19, 22 ), PoolIntArray( 24, 23, 25 ), PoolIntArray( 25, 23, 26 ), PoolIntArray( 29, 28, 30 ), PoolIntArray( 30, 28, 27 ), PoolIntArray( 30, 27, 32 ), PoolIntArray( 30, 32, 31 ), PoolIntArray( 34, 33, 35 ), PoolIntArray( 35, 33, 36 ), PoolIntArray( 40, 39, 37 ), PoolIntArray( 37, 39, 38 ), PoolIntArray( 43, 42, 41 ), PoolIntArray( 45, 44, 46 ), PoolIntArray( 46, 44, 47 ), PoolIntArray( 49, 48, 50 ), PoolIntArray( 50, 48, 51 ), PoolIntArray( 54, 53, 52 ), PoolIntArray( 57, 56, 55 ), PoolIntArray( 59, 58, 60 ), PoolIntArray( 60, 58, 61 ), PoolIntArray( 65, 64, 62 ), PoolIntArray( 62, 64, 63 ) ]
+agent/radius = 2.0
+
+[sub_resource type="OpenSimplexNoise" id=4]
+octaves = 1
+period = 40.0
+
+[sub_resource type="NoiseTexture" id=3]
+width = 256
+height = 256
+seamless = true
+noise = SubResource( 4 )
+
+[sub_resource type="SpatialMaterial" id=1]
+metallic_specular = 0.0
+roughness = 0.3
+emission_enabled = true
+emission = Color( 0.317647, 0, 0.776471, 1 )
+emission_energy = 0.5
+emission_operator = 1
+emission_on_uv2 = false
+emission_texture = SubResource( 3 )
+uv1_scale = Vector3( 0.5, 0.5, 0.5 )
+uv1_offset = Vector3( 0.5, 0.5, 0.5 )
+uv1_triplanar = true
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 2 )
+navigation = NodePath("Navigation")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="WorldEnvironment"]
+transform = Transform( 0.707107, -0.298836, 0.640856, 0, 0.906308, 0.422618, -0.707107, -0.298836, 0.640856, 0, 0, 0 )
+shadow_enabled = true
+
+[node name="Enemy" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.80345, 0 )
+
+[node name="Navigation" type="Navigation" parent="."]
+
+[node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Navigation"]
+navmesh = SubResource( 5 )
+
+[node name="CSGCombiner" type="CSGCombiner" parent="Navigation/NavigationMeshInstance"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+material_override = SubResource( 1 )
+calculate_tangents = false
+use_collision = true
+collision_mask = 0
+
+[node name="CSGBox" type="CSGBox" parent="Navigation/NavigationMeshInstance/CSGCombiner"]
+width = 20.0
+depth = 12.0
+
+[node name="Pillar" type="CSGBox" parent="Navigation/NavigationMeshInstance/CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, 0 )
+
+[node name="CSGBox4" type="CSGBox" parent="Navigation/NavigationMeshInstance/CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 2, 0 )
+depth = 12.0
+
+[node name="CSGBox5" type="CSGBox" parent="Navigation/NavigationMeshInstance/CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 2, 0 )
+depth = 12.0
+
+[node name="CSGBox6" type="CSGBox" parent="Navigation/NavigationMeshInstance/CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -7 )
+width = 24.0
+
+[node name="CSGBox7" type="CSGBox" parent="Navigation/NavigationMeshInstance/CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 7 )
+width = 24.0
+
+[node name="Pillar2" type="CSGBox" parent="Navigation/NavigationMeshInstance/CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, 0 )

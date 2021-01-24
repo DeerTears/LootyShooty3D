@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody",
+"class": "Actor",
+"language": "GDScript",
+"path": "res://actors/Actor.gd"
+}, {
 "base": "Node",
 "class": "Weapon",
 "language": "GDScript",
@@ -30,6 +35,7 @@ _global_script_classes=[ {
 "path": "res://definitions/scripts/scaling.gd"
 } ]
 _global_script_class_icons={
+"Actor": "",
 "Weapon": "",
 "gun": "",
 "meta": "",
@@ -41,6 +47,10 @@ _global_script_class_icons={
 config/name="LootyShooty3D"
 run/main_scene="res://levels/level_a.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+GameInfo="*res://singletons/gameinfo.gd"
 
 [debug]
 

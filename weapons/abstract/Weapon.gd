@@ -17,7 +17,7 @@ func shoot(): # refactor opportunity: make this function an inheritable behaviou
 		# note: BulletEmitters handle accuracy/damage on their own, passed down by the various "update_" functions later in this script
 
 func get_pellets() -> Array: # a function that turns the pellet count into an array of BulletEmitter scenes, ready to be added as children
-	var pellet_array: Array
+	var pellet_array: Array = []
 	for i in pellet_count:
 		var current_pellet = load(bullet_emitter_path).instance()
 		pellet_array.append(current_pellet)
@@ -38,18 +38,21 @@ func update_pellet_count(pellets:int): # adds BulletEmitter children to the Weap
 		print("now serving %s" % [get_child(i).name])
 	print("new child count: %s" % [get_child_count()])
 
+func update_bullet_range(bullet_range:float): # length of raycast in -z direction
+	for i in get_child_count():
+		var current_child = get_child(i)
+		current_child.find_node("RayCast").cast_to.z = -bullet_range
+
 func update_damage(dmg:int): # called by a WeaponClass to override each BulletEmitter's damage
 	for i in get_child_count():
 		var current_child = get_child(i)
-		if current_child.get_class() == "Timer":
-			continue
-		else:
-			get_child(i).damage = dmg
+#		if current_child.get_class() == "Timer":
+#			continue
+#		else:
+		current_child.damage = dmg
 
 func update_accuracy(accuracy:float): # called by a WeaponClass to override each BulletEmitter's accuracy
 	for i in get_child_count():
 		var current_child = get_child(i)
-		if current_child.get_class() == "Timer":
-			continue
-		else:
-			get_child(i).accuracy = accuracy
+
+		current_child.accuracy = accuracy

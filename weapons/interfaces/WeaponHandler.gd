@@ -26,6 +26,10 @@ onready var current_weapon = get_node("WeaponPistol") # only one weapon can be s
 onready var firerate_timer = $FirerateTimer # all guns share a firerate timer, use update_firerate on a WeaponClass at runtime to change this
 onready var swap_timer = $SwapTimer# same goes for swap timer, use update_swaptime in a WeaponClass class to change it for that gun
 
+func _ready():
+	firerate_timer.wait_time = current_weapon.firerate
+	swap_timer.wait_time = current_weapon.swap_time
+
 func _input(event):
 	if event.is_action_type() == false:
 		return

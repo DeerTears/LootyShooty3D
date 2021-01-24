@@ -43,6 +43,6 @@ func drop_facing(facing_direction:Vector3):
 
 func select(_true:bool):
 	if _true:
-		$SelectParticle.show()
+		print("tried to select weapon")
 	else:
-		$SelectParticle.hide()
+		print("tried to deselect weapon")

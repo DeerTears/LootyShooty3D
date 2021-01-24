@@ -20,5 +20,8 @@ func shoot():
 			target.hurt(damage)
 	$Particles.emitting = true
 	$Tracer.show()
-	yield(get_tree().create_timer(0.1),"timeout")
+	$Timer.stop()
+	$Timer.start()
+
+func _on_Timer_timeout():
 	$Tracer.hide()
