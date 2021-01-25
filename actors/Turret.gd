@@ -1,4 +1,4 @@
-extends Spatial
+extends Actor
 
 enum {
 	IDLE,
@@ -11,10 +11,10 @@ var state = IDLE
 func _ready():
 	change_state(state)
 
-func _on_Autodetect_body_entered(body):
+func _on_Autodetect_body_entered(_body):
 	change_state(AIMING)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if $Head/RayCast.is_colliding():
 		change_state(FIRING)
 	else:
@@ -33,6 +33,8 @@ func change_state(new_state:int):
 		FIRING:
 			$Head/AnimationPlayer.play("Firing")
 			$Head.look_at(GameInfo.player_position, Vector3.UP)
+			# todo: add target raycast to deal damage
+			# maybe even a timer just like what i have in the WeaponHandler, but simpler
 #			target.hurt(enemy_damage)
 		DEAD:
 			$Head/AnimationPlayer.play("Dead")

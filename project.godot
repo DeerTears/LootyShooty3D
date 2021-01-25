@@ -14,15 +14,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/Actor.gd"
 }, {
-"base": "Node",
+"base": "Spatial",
 "class": "Weapon",
 "language": "GDScript",
 "path": "res://weapons/abstract/Weapon.gd"
 }, {
+"base": "Spatial",
+"class": "WeaponSlot",
+"language": "GDScript",
+"path": "res://weapons/interfaces/WeaponSlot.gd"
+}, {
 "base": "Resource",
 "class": "gun",
 "language": "GDScript",
-"path": "res://weapons/abstract/gun.gd"
+"path": "res://weapons/abstract/Gun.gd"
 }, {
 "base": "Resource",
 "class": "meta",
@@ -32,6 +37,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Actor": "",
 "Weapon": "",
+"WeaponSlot": "",
 "gun": "",
 "meta": ""
 }

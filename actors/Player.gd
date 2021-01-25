@@ -12,7 +12,7 @@ var jump = 18
 var full_contact = false
 var alive: bool = true
 
-onready var pickup_notice = $Control/CenterContainer/PickupNotice
+onready var pickup_notice = $HUD/CenterContainer/PickupNotice
 export var mouse_sensitivity = 0.15
 
 var h_velocity = Vector3()
@@ -22,17 +22,17 @@ onready var ground_check = $GroundCheck
 
 func _ready():
 	speed = 22
-	$Head/EditorArrow.hide()
-	$Control/CenterContainer/PickupNotice.hide()
+	$Mesh/EditorArrow.hide()
+	$HUD/CenterContainer/PickupNotice.hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _on_PickupArea_body_entered(body):
 	if "gun_resource" in body:
 		new_item_selected = body
 		var new_gun_resource = new_item_selected.gun_resource
-		pickup_notice.show()
+		pickup_notice.show() # refactor: move notice to not be in the dead middle of the screen
 		pickup_notice.get_child(0).text = "press 'E' to pickup %s" % [new_gun_resource.name]
-#		print("%s, %s, %s" % [new_gun_resource.guntype, new_gun_resource.rarity, new_gun_resource.name])
+		# todo: have this result update our WeaponHandler's gun_resource for its current slot
 
 func _on_PickupArea_body_exited(body):
 	if "gun_resource" in body:
@@ -51,9 +51,6 @@ func _input(event):
 	if not alive:
 		return
 	if event.is_action_pressed("drop"):
-		# bug: guns roll with player pitch view, messes up particles, really annoying, makes no sense
-#		$Head/GunDropper.direction = -transform.basis.z
-#		$Head/GunDropper.drop_random_gun()
 		drop_gun()
 
 func drop_gun():
@@ -63,12 +60,8 @@ func drop_gun():
 	new_gun.gun_resource = load(meta.gunlist[randi() % meta.gunlist.size() - 1])
 	get_tree().root.add_child(new_gun)
 
-func hurt(damage:int):
-	health -= damage
-	print("I got hit for %s!" % [damage])
-	$Control/Effects/AnimationPlayer.play("Hurt")
-	if health <= 0:
-		die()
+func _hurt(): # hurt() is still in tact in actor.gd
+	$HUD/Effects/AnimationPlayer.play("Hurt")
 
 func die():
 	queue_free()
@@ -106,15 +99,8 @@ func _physics_process(delta):
 	GameInfo.player_position = global_transform.origin
 
 
-func _on_Animations_animation_finished(_anim_name):
-	pass	
-#	match anim_name:
-#		"ReadyPistol":
-#			$Head/Camera/Animations.play("IdlePistol")
-#		"FirePistol":
-#			$Head/Camera/Animations.play("IdlePistol")
-
-
+# todo: decouple animations and viewmodels from weapon slot
+# instead have it refer to the gun_resource guntype?
 func on_weapon_fired(weapon_name:String,_total_time_for_animation_to_complete:float):
 	$Head/Camera/Animations.playback_speed = 1.0
 	match weapon_name:
@@ -130,8 +116,6 @@ func on_weapon_fired(weapon_name:String,_total_time_for_animation_to_complete:fl
 		"Sniper":
 			$Head/Camera/Animations.playback_speed = 0.2
 			$Head/Camera/Animations.play("FireSMG")
-#	print("%s, %s" % [weapon_name, total_time_for_animation_to_complete])
-
 
 func on_weapon_swapped(weapon_name:String,_total_time_for_animation_to_complete:float):
 	for i in $Head/Camera/Viewmodel.get_child_count():

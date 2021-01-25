@@ -1,9 +1,17 @@
 [gd_resource type="Resource" load_steps=2 format=2]
 
-[ext_resource path="res://weapons/abstract/gun.gd" type="Script" id=1]
+[ext_resource path="res://weapons/abstract/Gun.gd" type="Script" id=1]
 
 [resource]
 script = ExtResource( 1 )
 name = "Box o' Bullets"
 guntype = 1
 rarity = 0
+pellet_count = 1
+damage = 3
+accuracy = 0.9
+firerate = 0.06
+swap_speed = 0.4
+swap_time = 0.4
+bullet_range = 100.0
+not_inventory_placeholder = true

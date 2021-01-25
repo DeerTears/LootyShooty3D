@@ -1,21 +1,12 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://actors/Player.gd" type="Script" id=1]
 [ext_resource path="res://models/pistol/pistol.tscn" type="PackedScene" id=2]
 [ext_resource path="res://weapons/interfaces/WeaponHandler.tscn" type="PackedScene" id=3]
-[ext_resource path="res://particles/crosshairs/target_6.png" type="Texture" id=4]
-[ext_resource path="res://weapons/components/GunDropper.tscn" type="PackedScene" id=5]
+[ext_resource path="res://control/hud/hud.tscn" type="PackedScene" id=4]
 [ext_resource path="res://models/shotgun/shotgun.tscn" type="PackedScene" id=6]
 [ext_resource path="res://models/smg/smg.tscn" type="PackedScene" id=7]
 [ext_resource path="res://models/sniper/sniper.tscn" type="PackedScene" id=8]
-
-[sub_resource type="CapsuleMesh" id=1]
-mid_height = 3.0
-
-[sub_resource type="CapsuleShape" id=2]
-height = 3.0
-
-[sub_resource type="CylinderShape" id=3]
 
 [sub_resource type="Animation" id=4]
 resource_name = "FirePistol"
@@ -129,42 +120,20 @@ tracks/1/keys = {
 "values": [ Vector3( -0.024, 0.109, -0.157 ), Vector3( 0, 0, 0.1 ), Vector3( 0, 0, 0.05 ), Vector3( 0, 0, 0 ) ]
 }
 
+[sub_resource type="CapsuleMesh" id=1]
+mid_height = 3.0
+
 [sub_resource type="PrismMesh" id=8]
 size = Vector3( 2, 2, 0.5 )
+
+[sub_resource type="CapsuleShape" id=2]
+height = 3.0
+
+[sub_resource type="CylinderShape" id=3]
 
 [sub_resource type="CylinderShape" id=9]
 radius = 3.0
 height = 8.0
-
-[sub_resource type="Animation" id=10]
-length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("Hurt:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 0.490196, 0, 0, 1 ), Color( 0.490196, 0, 0, 0 ) ]
-}
-
-[sub_resource type="Animation" id=11]
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Hurt:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 0.490196, 0, 0, 0 ) ]
-}
 
 [node name="Player" type="KinematicBody" groups=[
 "Player",
@@ -173,26 +142,17 @@ collision_layer = 2
 collision_mask = 9
 script = ExtResource( 1 )
 
-[node name="Mesh" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-cast_shadow = 0
-mesh = SubResource( 1 )
-material/0 = null
-
-[node name="CollisionBody" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-shape = SubResource( 2 )
-
-[node name="CollisionFoot" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0 )
-visible = false
-shape = SubResource( 3 )
-
 [node name="Head" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0 )
+__meta__ = {
+"_editor_description_": "Holds Camera and points the WeaponHandler to shoot in the right direction."
+}
 
 [node name="Camera" type="Camera" parent="Head"]
 far = 300.0
+__meta__ = {
+"_editor_description_": "Contains viewmodels and Animator node."
+}
 
 [node name="Viewmodel" type="Spatial" parent="Head/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01 )
@@ -220,16 +180,26 @@ anims/FireSMG = SubResource( 5 )
 anims/IdlePistol = SubResource( 6 )
 anims/ReadyPistol = SubResource( 7 )
 
-[node name="WeaponHandler" parent="Head/Camera" instance=ExtResource( 3 )]
+[node name="WeaponHandler" parent="Head" instance=ExtResource( 3 )]
 
-[node name="EditorArrow" type="MeshInstance" parent="Head"]
-transform = Transform( 1, 0, 0, 0, 0.0871556, 0.996195, 0, -0.996195, 0.0871556, 0, -0.25, -3 )
-visible = false
+[node name="Mesh" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+cast_shadow = 0
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="EditorArrow" type="MeshInstance" parent="Mesh"]
+transform = Transform( 1, 0, 0, 0, -0.996195, 0.0871554, 0, -0.0871554, -0.996195, 0, -3, -1 )
 mesh = SubResource( 8 )
 material/0 = null
 
-[node name="GunDropper" parent="Head" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.25, 0 )
+[node name="CollisionBody" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="CollisionFoot" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0 )
+shape = SubResource( 3 )
 
 [node name="GroundCheck" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0 )
@@ -244,71 +214,8 @@ collision_mask = 4
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 shape = SubResource( 9 )
 
-[node name="Control" type="Control" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Effects" type="Control" parent="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Hurt" type="ColorRect" parent="Control/Effects"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-color = Color( 0.490196, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Effects"]
-autoplay = "Idle"
-anims/Hurt = SubResource( 10 )
-anims/Idle = SubResource( 11 )
-
-[node name="CenterContainer" type="CenterContainer" parent="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PickupNotice" type="PanelContainer" parent="Control/CenterContainer"]
-visible = false
-margin_left = 505.0
-margin_top = 293.0
-margin_right = 519.0
-margin_bottom = 307.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Control/CenterContainer/PickupNotice"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 183.0
-margin_bottom = 21.0
-text = "press 'E' to pickup the thing"
-align = 1
-valign = 1
-
-[node name="Crosshair" type="TextureRect" parent="Control/CenterContainer"]
-margin_left = 488.0
-margin_top = 276.0
-margin_right = 536.0
-margin_bottom = 324.0
-rect_min_size = Vector2( 48, 48 )
-texture = ExtResource( 4 )
-expand = true
-stretch_mode = 5
-[connection signal="animation_finished" from="Head/Camera/Animations" to="." method="_on_Animations_animation_finished"]
-[connection signal="fired" from="Head/Camera/WeaponHandler" to="." method="on_weapon_fired"]
-[connection signal="swapped" from="Head/Camera/WeaponHandler" to="." method="on_weapon_swapped"]
+[node name="HUD" parent="." instance=ExtResource( 4 )]
+[connection signal="fired" from="Head/WeaponHandler" to="." method="on_weapon_fired"]
+[connection signal="swapped" from="Head/WeaponHandler" to="." method="on_weapon_swapped"]
 [connection signal="body_entered" from="PickupArea" to="." method="_on_PickupArea_body_entered"]
 [connection signal="body_exited" from="PickupArea" to="." method="_on_PickupArea_body_exited"]

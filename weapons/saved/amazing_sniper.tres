@@ -1,9 +1,17 @@
 [gd_resource type="Resource" load_steps=2 format=2]
 
-[ext_resource path="res://weapons/abstract/gun.gd" type="Script" id=1]
+[ext_resource path="res://weapons/abstract/Gun.gd" type="Script" id=1]
 
 [resource]
 script = ExtResource( 1 )
 name = "The Steak Knife"
 guntype = 4
-rarity = 3
+rarity = 2
+pellet_count = 3
+damage = 100
+accuracy = 0.96
+firerate = 2.0
+swap_speed = 1.0
+swap_time = 1.0
+bullet_range = 250.0
+not_inventory_placeholder = true

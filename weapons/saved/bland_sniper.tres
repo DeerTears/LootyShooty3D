@@ -1,9 +1,17 @@
 [gd_resource type="Resource" load_steps=2 format=2]
 
-[ext_resource path="res://weapons/abstract/gun.gd" type="Script" id=1]
+[ext_resource path="res://weapons/abstract/Gun.gd" type="Script" id=1]
 
 [resource]
 script = ExtResource( 1 )
 name = "Nail Fastener"
 guntype = 4
 rarity = 0
+pellet_count = 1
+damage = 75
+accuracy = 0.95
+firerate = 2.0
+swap_speed = 2.0
+swap_time = 2.0
+bullet_range = 220.0
+not_inventory_placeholder = true

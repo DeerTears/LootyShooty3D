@@ -9,6 +9,9 @@ export(float, 0.0, 1.0, 0.001) var accuracy = 0.95 # 1 == max accuracy, also upd
 func _ready():
 	$Tracer.hide()
 
+# todo: put accuracy calculation in its own function
+# todo: make accuracy change the projected "cast_to" of the BulletEmitter, not the spatial rotation
+
 func shoot():
 	var inaccuracy = rand_range(-1.0,1.0)
 	rotation = Vector3.ZERO

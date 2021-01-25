@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://actors/Turret.gd" type="Script" id=1]
 
@@ -110,7 +110,13 @@ radius = 20.0
 [sub_resource type="CubeMesh" id=12]
 size = Vector3( 0.2, 0.2, 0.2 )
 
-[node name="Turret" type="Spatial"]
+[sub_resource type="ConvexPolygonShape" id=13]
+points = PoolVector3Array( 0, 1, 0, 2, -2, 2, -2, -2, 2, -2, -2, -2, 2, -2, -2 )
+
+[sub_resource type="BoxShape" id=14]
+extents = Vector3( 0.5, 1, 1 )
+
+[node name="Turret" type="KinematicBody"]
 script = ExtResource( 1 )
 
 [node name="Head" type="Spatial" parent="."]
@@ -157,6 +163,10 @@ enabled = true
 cast_to = Vector3( 0, 0, -20 )
 collision_mask = 2
 
+[node name="RemoteTransform" type="RemoteTransform" parent="Head"]
+remote_path = NodePath("../../HeadCollider")
+update_scale = false
+
 [node name="Connector" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0 )
 mesh = SubResource( 9 )
@@ -182,16 +192,24 @@ material/0 = null
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14052, -2.1, -1.3 )
+visible = false
 mesh = SubResource( 12 )
 material/0 = null
 
 [node name="MeshInstance3" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15948, -2.1, 1.3 )
+visible = false
 mesh = SubResource( 12 )
 material/0 = null
 
 [node name="MeshInstance4" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14052, -2.1, 1.3 )
+visible = false
 mesh = SubResource( 12 )
 material/0 = null
-[connection signal="body_entered" from="Autodetect" to="." method="_on_Autodetect_body_entered"]
+
+[node name="BodyCollider" type="CollisionShape" parent="."]
+shape = SubResource( 13 )
+
+[node name="HeadCollider" type="CollisionShape" parent="."]
+shape = SubResource( 14 )

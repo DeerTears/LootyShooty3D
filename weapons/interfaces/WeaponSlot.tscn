@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://weapons/interfaces/WeaponSlot.gd" type="Script" id=1]
+
+[node name="WeaponSlot" type="Spatial"]
+script = ExtResource( 1 )

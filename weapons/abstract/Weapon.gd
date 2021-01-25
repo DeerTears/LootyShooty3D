@@ -1,5 +1,7 @@
-extends Node
+extends Spatial
 class_name Weapon # an abstract weapon class that other WeaponClasses (WeaponPistol, WeaponSMG, etc.) refer to, using the strategy pattern
+
+# these Weapons do not use gun_resource or update their own stats, that is reserved for WeaponSlot and WeaponHandler
 
 var pellet_count: int = 1 # determines how many BulletEmitters get added to the WeaponClass that extends this script
 var bullet_emitter_path = "res://weapons/components/BulletEmitter.tscn"
@@ -29,6 +31,9 @@ func update_firerate(time:float): # all guns share one firerate timer
 func update_swap_time(time:float): # all guns share one weapon swap timer
 	swap_time = time
 
+# BUG: UPDATE_PELLET_COUNT() NEEDS TO COME BEFORE UPDATE_DAMAGE()
+# otherwise BulletEmitters will deal the default of 1 damage
+
 func update_pellet_count(pellets:int): # adds BulletEmitter children to the WeaponClass that called for it, based on the passed pellet count
 	pellet_count = pellets
 	var pellets_array = get_pellets()
@@ -46,13 +51,12 @@ func update_bullet_range(bullet_range:float): # length of raycast in -z directio
 func update_damage(dmg:int): # called by a WeaponClass to override each BulletEmitter's damage
 	for i in get_child_count():
 		var current_child = get_child(i)
-#		if current_child.get_class() == "Timer":
-#			continue
-#		else:
 		current_child.damage = dmg
+
+# BUG: UPDATE_PELLET_COUNT() NEEDS TO COME BEFORE UPDATE_ACCURACY()
+# otherwise BulletEmitters will not have any spread applied
 
 func update_accuracy(accuracy:float): # called by a WeaponClass to override each BulletEmitter's accuracy
 	for i in get_child_count():
 		var current_child = get_child(i)
-
 		current_child.accuracy = accuracy

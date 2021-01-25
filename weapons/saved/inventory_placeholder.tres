@@ -4,14 +4,14 @@
 
 [resource]
 script = ExtResource( 1 )
-name = "The Worst Gun in the Game"
+name = "[empty]"
 guntype = 0
 rarity = 0
 pellet_count = 1
-damage = 33
-accuracy = 0.93
-firerate = 0.5
-swap_speed = 0.8
-swap_time = 0.8
-bullet_range = 110.0
-not_inventory_placeholder = true
+damage = 1
+accuracy = 1.0
+firerate = 3.0
+swap_speed = 4.0
+swap_time = 4.0
+bullet_range = 50.0
+not_inventory_placeholder = false

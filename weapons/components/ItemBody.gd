@@ -16,10 +16,9 @@ func check_gun_resource():
 	else:
 		trail_color = meta.rarity_colors[gun_resource.rarity]
 		collision_size = meta.guntype_collision_size[gun_resource.guntype]
-		if gun_resource.guntype != meta.guntype.KIT:
-			$Mesh/DefaultMesh.queue_free()
-			var new_mesh = load(meta.guntype_mesh_path[gun_resource.guntype])
-			$Mesh.add_child(new_mesh.instance())
+		$Mesh/DefaultMesh.queue_free()
+		var new_mesh = load(meta.guntype_mesh_path[gun_resource.guntype])
+		$Mesh.add_child(new_mesh.instance())
 	$Trail.modulate = trail_color
 	$CollisionShape.scale = collision_size
 

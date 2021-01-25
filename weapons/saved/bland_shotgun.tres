@@ -1,9 +1,17 @@
 [gd_resource type="Resource" load_steps=2 format=2]
 
-[ext_resource path="res://weapons/abstract/gun.gd" type="Script" id=1]
+[ext_resource path="res://weapons/abstract/Gun.gd" type="Script" id=1]
 
 [resource]
 script = ExtResource( 1 )
 name = "Shrapnel Spreader"
 guntype = 3
 rarity = 0
+pellet_count = 12
+damage = 11
+accuracy = 0.8
+firerate = 1.0
+swap_speed = 1.5
+swap_time = 1.5
+bullet_range = 90.0
+not_inventory_placeholder = true
