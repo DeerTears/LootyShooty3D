@@ -2,7 +2,7 @@
 
 [ext_resource path="res://actors/Player.gd" type="Script" id=1]
 [ext_resource path="res://models/pistol/pistol.tscn" type="PackedScene" id=2]
-[ext_resource path="res://weapons/components/WeaponHandler.tscn" type="PackedScene" id=3]
+[ext_resource path="res://weapons/interfaces/WeaponHandler.tscn" type="PackedScene" id=3]
 [ext_resource path="res://particles/crosshairs/target_6.png" type="Texture" id=4]
 [ext_resource path="res://weapons/components/GunDropper.tscn" type="PackedScene" id=5]
 [ext_resource path="res://models/shotgun/shotgun.tscn" type="PackedScene" id=6]
@@ -224,6 +224,7 @@ anims/ReadyPistol = SubResource( 7 )
 
 [node name="EditorArrow" type="MeshInstance" parent="Head"]
 transform = Transform( 1, 0, 0, 0, 0.0871556, 0.996195, 0, -0.996195, 0.0871556, 0, -0.25, -3 )
+visible = false
 mesh = SubResource( 8 )
 material/0 = null
 

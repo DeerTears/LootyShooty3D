@@ -9,7 +9,7 @@ enum {
 	DEAD
 }
 var loot_claimed: bool = false
-var enemy_damage = 10
+var enemy_damage = 2
 var state = IDLE
 var random_misdirection_phi: float = 0.0
 func _ready():
@@ -64,12 +64,11 @@ func change_state(new_state:int):
 			change_state(ENGAGE)
 		SWING:
 			$Poof.emitting = true
-			yield(get_tree().create_timer(0.2),"timeout") # simulating animation swing startup
 			if $RayCast.is_colliding():
 				var target = $RayCast.get_collider()
 				if target.is_in_group("Player"):
 					target.hurt(enemy_damage)
-			yield(get_tree().create_timer(0.2),"timeout") # simulating animation swing slowdown
+			yield(get_tree().create_timer(0.3),"timeout") # simulating animation swing slowdown
 			change_state(BACK_AWAY)
 		DEAD:
 			if loot_claimed: # todo: does disabling this re-enable getting multiple guns with a shotgun?
@@ -78,7 +77,7 @@ func change_state(new_state:int):
 			if 1 == 1: # todo: if we should drop a gun...
 				$GunDropper.direction = -transform.basis.z
 				$GunDropper.drop_random_gun()
-			$CollisionShape.disabled = true
+#			$CollisionShape.disabled = true
 			$PresenceDetector/CollisionShape.disabled = true
 			$PlayerDetector/CollisionShape.disabled = true
 			$AnimationPlayer.play("Die")

@@ -1,10 +1,11 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://weapons/WeaponPistol.gd" type="Script" id=1]
+[ext_resource path="res://weapons/classes/WeaponPistol.gd" type="Script" id=1]
 [ext_resource path="res://weapons/interfaces/WeaponHandler.gd" type="Script" id=2]
-[ext_resource path="res://weapons/WeaponShotgun.gd" type="Script" id=3]
-[ext_resource path="res://weapons/WeaponSMG.gd" type="Script" id=4]
-[ext_resource path="res://weapons/WeaponSniper.gd" type="Script" id=5]
+[ext_resource path="res://weapons/classes/WeaponShotgun.gd" type="Script" id=3]
+[ext_resource path="res://weapons/classes/WeaponSMG.gd" type="Script" id=4]
+[ext_resource path="res://weapons/classes/WeaponSniper.gd" type="Script" id=5]
+
 
 [node name="WeaponHandler" type="Spatial"]
 script = ExtResource( 2 )

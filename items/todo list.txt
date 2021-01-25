@@ -1,7 +1,0 @@
-currently, these resources aren't being used for anything except world drops
-
-it would be cool, once the guns work in full, to have them contain stats that the guns could refer from
-
-alternatively, this folder could contain the curves that would balance out weapon stats against eachother?
-
-i think maybe more useful would be to store rarity information and guntype in here, so that they don't necessarily need to be in the meta class script. It's still an alright choice though, I'll just have to see what works best when the guns are fully functional as they're getting there.

@@ -22,24 +22,18 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "gun",
 "language": "GDScript",
-"path": "res://items/classes/gun.gd"
+"path": "res://weapons/abstract/gun.gd"
 }, {
 "base": "Resource",
 "class": "meta",
 "language": "GDScript",
-"path": "res://definitions/meta.gd"
-}, {
-"base": "Resource",
-"class": "scaling",
-"language": "GDScript",
-"path": "res://definitions/scripts/scaling.gd"
+"path": "res://weapons/meta.gd"
 } ]
 _global_script_class_icons={
 "Actor": "",
 "Weapon": "",
 "gun": "",
-"meta": "",
-"scaling": ""
+"meta": ""
 }
 
 [application]
