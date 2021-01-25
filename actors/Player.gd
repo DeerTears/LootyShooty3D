@@ -28,23 +28,14 @@ func _ready():
 
 func _on_PickupArea_body_entered(body):
 	if "gun_resource" in body:
-		if body.downtime_active:
-			return
-		var old_item_selected
-		if new_item_selected != null:
-			old_item_selected = new_item_selected
-			old_item_selected.select(false)
 		new_item_selected = body
-		new_item_selected.set_downtime_active(true)
-		new_item_selected.select(true)
 		var new_gun_resource = new_item_selected.gun_resource
 		pickup_notice.show()
 		pickup_notice.get_child(0).text = "press 'E' to pickup %s" % [new_gun_resource.name]
-		print("%s, %s, %s" % [new_gun_resource.guntype, new_gun_resource.rarity, new_gun_resource.name])
+#		print("%s, %s, %s" % [new_gun_resource.guntype, new_gun_resource.rarity, new_gun_resource.name])
 
 func _on_PickupArea_body_exited(body):
 	if "gun_resource" in body:
-		body.select(false)
 		pickup_notice.hide()
 
 func _input(event):
@@ -115,7 +106,7 @@ func _physics_process(delta):
 	GameInfo.player_position = global_transform.origin
 
 
-func _on_Animations_animation_finished(anim_name):
+func _on_Animations_animation_finished(_anim_name):
 	pass	
 #	match anim_name:
 #		"ReadyPistol":
@@ -124,7 +115,7 @@ func _on_Animations_animation_finished(anim_name):
 #			$Head/Camera/Animations.play("IdlePistol")
 
 
-func on_weapon_fired(weapon_name:String,total_time_for_animation_to_complete:float):
+func on_weapon_fired(weapon_name:String,_total_time_for_animation_to_complete:float):
 	$Head/Camera/Animations.playback_speed = 1.0
 	match weapon_name:
 		"Pistol":
@@ -136,28 +127,30 @@ func on_weapon_fired(weapon_name:String,total_time_for_animation_to_complete:flo
 		"SMG":
 			$Head/Camera/Animations.stop()
 			$Head/Camera/Animations.play("FireSMG")
-	print("%s, %s" % [weapon_name, total_time_for_animation_to_complete])
+		"Sniper":
+			$Head/Camera/Animations.playback_speed = 0.2
+			$Head/Camera/Animations.play("FireSMG")
+#	print("%s, %s" % [weapon_name, total_time_for_animation_to_complete])
 
 
-func on_weapon_swapped(weapon_name:String,total_time_for_animation_to_complete:float):
-	$Head/Camera/Viewmodel/PistolMesh.hide()
-	$Head/Camera/Viewmodel/ShotgunMesh.hide()
-	$Head/Camera/Viewmodel/SMGMesh.hide()
+func on_weapon_swapped(weapon_name:String,_total_time_for_animation_to_complete:float):
+	for i in $Head/Camera/Viewmodel.get_child_count():
+		$Head/Camera/Viewmodel.get_child(i).hide()
+	$Head/Camera/Animations.stop()
 	match weapon_name:
 		"Pistol":
-			$Head/Camera/Animations.stop()
 			$Head/Camera/Viewmodel/PistolMesh.show()
 			$Head/Camera/Animations.play("ReadyPistol")
 			$Head/Camera/Animations.playback_speed = 1.0
 		"Shotgun":
-			$Head/Camera/Animations.stop()
 			$Head/Camera/Viewmodel/ShotgunMesh.show()
 			$Head/Camera/Animations.play("ReadyPistol")
 			$Head/Camera/Animations.playback_speed = 0.6
 		"SMG":
-			$Head/Camera/Animations.stop()
 			$Head/Camera/Viewmodel/SMGMesh.show()
 			$Head/Camera/Animations.play("ReadyPistol")
 			$Head/Camera/Animations.playback_speed = 1.6
 		"Sniper":
-			pass
+			$Head/Camera/Viewmodel/SniperMesh.show()
+			$Head/Camera/Animations.play("ReadyPistol")
+			$Head/Camera/Animations.playback_speed = 0.4

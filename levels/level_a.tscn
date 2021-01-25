@@ -1,9 +1,11 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://actors/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://weapons/components/ItemBody.tscn" type="PackedScene" id=3]
 [ext_resource path="res://actors/Enemy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://actors/Spawner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://actors/Turret.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Curve3D" id=1]
 _data = {
@@ -63,10 +65,10 @@ size = Vector3( 90, 64, 64 )
 [sub_resource type="ConcavePolygonShape" id=11]
 data = PoolVector3Array( -45, 32, 32, 45, 32, 32, -45, -32, 32, 45, 32, 32, 45, -32, 32, -45, -32, 32, 45, 32, -32, -45, 32, -32, 45, -32, -32, -45, 32, -32, -45, -32, -32, 45, -32, -32, 45, 32, 32, 45, 32, -32, 45, -32, 32, 45, 32, -32, 45, -32, -32, 45, -32, 32, -45, 32, -32, -45, 32, 32, -45, -32, -32, -45, 32, 32, -45, -32, 32, -45, -32, -32, 45, 32, 32, -45, 32, 32, 45, 32, -32, -45, 32, 32, -45, 32, -32, 45, 32, -32, -45, -32, 32, 45, -32, 32, -45, -32, -32, 45, -32, 32, 45, -32, -32, -45, -32, -32 )
 
-[sub_resource type="CubeMesh" id=17]
+[sub_resource type="CubeMesh" id=12]
 size = Vector3( 16, 8, 16 )
 
-[sub_resource type="ConcavePolygonShape" id=18]
+[sub_resource type="ConcavePolygonShape" id=13]
 data = PoolVector3Array( -8, 4, 8, 8, 4, 8, -8, -4, 8, 8, 4, 8, 8, -4, 8, -8, -4, 8, 8, 4, -8, -8, 4, -8, 8, -4, -8, -8, 4, -8, -8, -4, -8, 8, -4, -8, 8, 4, 8, 8, 4, -8, 8, -4, 8, 8, 4, -8, 8, -4, -8, 8, -4, 8, -8, 4, -8, -8, 4, 8, -8, -4, -8, -8, 4, 8, -8, -4, 8, -8, -4, -8, 8, 4, 8, -8, 4, 8, 8, 4, -8, -8, 4, 8, -8, 4, -8, 8, 4, -8, -8, -4, 8, 8, -4, 8, -8, -4, -8, 8, -4, 8, 8, -4, -8, -8, -4, -8 )
 
 [node name="Spatial" type="Spatial"]
@@ -165,14 +167,14 @@ shape = SubResource( 11 )
 
 [node name="MeshInstance6" type="MeshInstance" parent="World"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -51, -4, 263 )
-mesh = SubResource( 17 )
+mesh = SubResource( 12 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="World/MeshInstance6"]
 collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="World/MeshInstance6/StaticBody"]
-shape = SubResource( 18 )
+shape = SubResource( 13 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( -0.924765, 0, 0.380538, 0, 1, 0, -0.380538, 0, -0.924765, 63.6238, 2.19573, 175.369 )
@@ -194,3 +196,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -79.6519, 23.1945, 290.351 )
 
 [node name="Enemy" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -77.9075, 23.1945, 248.18 )
+
+[node name="Spawner" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -49.3192, 10.8017, 261.889 )
+lifetime_copies = 10
+
+[node name="Turret" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 55.6687, 14.0332, 199.51 )

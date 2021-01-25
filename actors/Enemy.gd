@@ -11,7 +11,7 @@ enum {
 var loot_claimed: bool = false
 var enemy_damage = 10
 var state = IDLE
-
+var random_misdirection_phi: float = 0.0
 func _ready():
 	change_state(IDLE)
 
@@ -32,6 +32,7 @@ func _physics_process(_delta):
 			direction = global_transform.origin.direction_to(GameInfo.player_position)
 		BACK_AWAY:
 			direction = global_transform.origin.direction_to(GameInfo.player_position) * -1
+			direction = direction.rotated(Vector3.UP,random_misdirection_phi)
 		IDLE:
 			direction = Vector3.ZERO
 		DEAD:
@@ -55,19 +56,20 @@ func change_state(new_state:int):
 		ENGAGE:
 			pass
 		BACK_AWAY:
-			yield(get_tree().create_timer(1.0),"timeout")
+			random_misdirection_phi = rand_range(0.0,1.1745329)
+			yield(get_tree().create_timer(1.2),"timeout")
 			change_state(WARY)
 		WARY:
-			yield(get_tree().create_timer(0.5),"timeout")
+			yield(get_tree().create_timer(0.25),"timeout")
 			change_state(ENGAGE)
 		SWING:
 			$Poof.emitting = true
+			yield(get_tree().create_timer(0.2),"timeout") # simulating animation swing startup
 			if $RayCast.is_colliding():
 				var target = $RayCast.get_collider()
 				if target.is_in_group("Player"):
-					print("hit %s" % [target])
 					target.hurt(enemy_damage)
-			yield(get_tree().create_timer(1.0),"timeout")
+			yield(get_tree().create_timer(0.2),"timeout") # simulating animation swing slowdown
 			change_state(BACK_AWAY)
 		DEAD:
 			if loot_claimed: # todo: does disabling this re-enable getting multiple guns with a shotgun?

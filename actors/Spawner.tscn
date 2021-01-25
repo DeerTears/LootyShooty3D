@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://actors/Spawner.gd" type="Script" id=1]
+
+[sub_resource type="Shader" id=2]
+code = "shader_type spatial;
+render_mode unshaded;
+void fragment(){
+	ALBEDO = vec3(SCREEN_UV.x,SCREEN_UV.y,1.0);
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+
+[sub_resource type="SphereMesh" id=1]
+material = SubResource( 3 )
+radius = 0.4
+radial_segments = 4
+rings = 1
+
+[node name="Spawner" type="Spatial"]
+script = ExtResource( 1 )
+scene_path_to_spawn = "res://actors/Enemy.tscn"
+
+[node name="EditorMesh" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="Children" type="Spatial" parent="."]

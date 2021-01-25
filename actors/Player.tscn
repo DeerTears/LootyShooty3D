@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://actors/Player.gd" type="Script" id=1]
 [ext_resource path="res://models/pistol/pistol.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://weapons/components/GunDropper.tscn" type="PackedScene" id=5]
 [ext_resource path="res://models/shotgun/shotgun.tscn" type="PackedScene" id=6]
 [ext_resource path="res://models/smg/smg.tscn" type="PackedScene" id=7]
+[ext_resource path="res://models/sniper/sniper.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CapsuleMesh" id=1]
 mid_height = 3.0
@@ -45,7 +46,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 50, 0, 0 ), Vector3( 0, 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=5]
 resource_name = "FireSMG"
 length = 0.2
 tracks/0/type = "value"
@@ -73,8 +74,7 @@ tracks/1/keys = {
 "values": [ Vector3( 5, 0, -10 ), Vector3( 0, 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "IdlePistol"
+[sub_resource type="Animation" id=6]
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -102,8 +102,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "ReadyPistol"
+[sub_resource type="Animation" id=7]
 length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("Viewmodel:rotation_degrees")
@@ -130,15 +129,14 @@ tracks/1/keys = {
 "values": [ Vector3( -0.024, 0.109, -0.157 ), Vector3( 0, 0, 0.1 ), Vector3( 0, 0, 0.05 ), Vector3( 0, 0, 0 ) ]
 }
 
-[sub_resource type="PrismMesh" id=7]
+[sub_resource type="PrismMesh" id=8]
 size = Vector3( 2, 2, 0.5 )
 
-[sub_resource type="CylinderShape" id=8]
+[sub_resource type="CylinderShape" id=9]
 radius = 3.0
 height = 8.0
 
-[sub_resource type="Animation" id=9]
-resource_name = "Hurt"
+[sub_resource type="Animation" id=10]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Hurt:color")
@@ -153,8 +151,7 @@ tracks/0/keys = {
 "values": [ Color( 0.490196, 0, 0, 1 ), Color( 0.490196, 0, 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=10]
-resource_name = "Idle"
+[sub_resource type="Animation" id=11]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Hurt:color")
@@ -205,29 +202,29 @@ transform = Transform( -0.1, 0, 1.50996e-08, 0, 0.1, 0, -1.50996e-08, 0, -0.1, 0
 visible = false
 
 [node name="ShotgunMesh" parent="Head/Camera/Viewmodel" instance=ExtResource( 6 )]
-transform = Transform( -0.1, 0, -3.25841e-08, 0, 0.1, 0, 3.25841e-08, 0, -0.1, 0.095, -0.061, -0.25 )
+transform = Transform( -0.1, 0, -3.25841e-08, 0, 0.1, 0, 3.25841e-08, 0, -0.1, 0.08, -0.051, -0.25 )
 visible = false
 
 [node name="SMGMesh" parent="Head/Camera/Viewmodel" instance=ExtResource( 7 )]
-transform = Transform( -0.05, 0, -1.62921e-08, 0, 0.05, 0, 1.62921e-08, 0, -0.05, 0.064, -0.044, -0.122 )
+transform = Transform( -0.05, 0, -1.94707e-08, 0, 0.05, 0, 1.94707e-08, 0, -0.05, 0.064, -0.044, -0.122 )
+visible = false
+
+[node name="SniperMesh" parent="Head/Camera/Viewmodel" instance=ExtResource( 8 )]
+transform = Transform( -0.05, 0, -1.62921e-08, 0, 0.05, 0, 1.62921e-08, 0, -0.05, 0.058, -0.049, -0.157 )
+visible = false
 
 [node name="Animations" type="AnimationPlayer" parent="Head/Camera"]
 autoplay = "ReadyPistol"
 anims/FirePistol = SubResource( 4 )
-anims/FireSMG = SubResource( 11 )
-anims/IdlePistol = SubResource( 5 )
-anims/ReadyPistol = SubResource( 6 )
-
-[node name="RemoteTransform" type="RemoteTransform" parent="Head/Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.25, 0 )
-remote_path = NodePath("../../GunDropper")
-update_scale = false
+anims/FireSMG = SubResource( 5 )
+anims/IdlePistol = SubResource( 6 )
+anims/ReadyPistol = SubResource( 7 )
 
 [node name="WeaponHandler" parent="Head/Camera" instance=ExtResource( 3 )]
 
 [node name="EditorArrow" type="MeshInstance" parent="Head"]
 transform = Transform( 1, 0, 0, 0, 0.0871556, 0.996195, 0, -0.996195, 0.0871556, 0, -0.25, -3 )
-mesh = SubResource( 7 )
+mesh = SubResource( 8 )
 material/0 = null
 
 [node name="GunDropper" parent="Head" instance=ExtResource( 5 )]
@@ -244,7 +241,7 @@ collision_mask = 4
 
 [node name="CollisionShape" type="CollisionShape" parent="PickupArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-shape = SubResource( 8 )
+shape = SubResource( 9 )
 
 [node name="Control" type="Control" parent="."]
 anchor_right = 1.0
@@ -271,8 +268,8 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Effects"]
 autoplay = "Idle"
-anims/Hurt = SubResource( 9 )
-anims/Idle = SubResource( 10 )
+anims/Hurt = SubResource( 10 )
+anims/Idle = SubResource( 11 )
 
 [node name="CenterContainer" type="CenterContainer" parent="Control"]
 anchor_right = 1.0

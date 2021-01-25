@@ -29,6 +29,7 @@ onready var swap_timer = $SwapTimer# same goes for swap timer, use update_swapti
 func _ready():
 	firerate_timer.wait_time = current_weapon.firerate
 	swap_timer.wait_time = current_weapon.swap_time
+	emit_signal("swapped","Pistol", current_weapon.swap_time)
 
 func _input(event):
 	if event.is_action_type() == false:

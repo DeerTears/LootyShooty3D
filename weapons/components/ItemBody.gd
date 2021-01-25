@@ -5,20 +5,10 @@ export (Resource) var gun_resource
 var trail_color: Color = Color.black
 var collision_size: Vector3
 var drop_trajectory = Vector3.UP
-var downtime_active: bool = false
 
 func _ready():
-	set_downtime_active(true)
 	drop_facing(drop_trajectory)
 	check_gun_resource()
-
-func set_downtime_active(_true:bool):
-	downtime_active = _true
-	if _true:
-		$ReselectDowntime.start()
-
-func _on_ReselectDowntime_timeout():
-	set_downtime_active(false)
 
 func check_gun_resource():
 	if gun_resource == null:
@@ -40,9 +30,3 @@ func drop_facing(facing_direction:Vector3):
 	facing_direction.y += 0.5
 	facing_direction = facing_direction.normalized()
 	apply_impulse(Vector3.ZERO, Vector3(facing_direction * 18))
-
-func select(_true:bool):
-	if _true:
-		print("tried to select weapon")
-	else:
-		print("tried to deselect weapon")

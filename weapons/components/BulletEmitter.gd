@@ -16,7 +16,7 @@ func shoot():
 	if ray.is_colliding():
 		var target = ray.get_collider()
 		if target.is_in_group("Enemy"):
-			print("hit %s" % [target])
+#			print("hit %s" % [target])
 			target.hurt(damage)
 	$Particles.emitting = true
 	$Tracer.show()
