@@ -9,11 +9,12 @@ var inventory_size: int = 2
 var active_weapon: Node
 
 const weapon_names = [ # our suffixes for each WeaponClass class, dynamically using get_node() with "%s"
-	"Pistol",
-	"Shotgun",
-	"SMG",
-	"Sniper",
-]
+	"Pistol", # 0
+	"SMG", # 1
+	"Rifle", # 2
+	"Shotgun", # 3
+	"Sniper", # 4
+] # same order as in /weapons/meta.gd
 
 onready var firerate_timer = $FirerateTimer # All slots share a firerate timer, use update_firerate through WeaponSlot at runtime to change this.
 onready var swap_timer = $SwapTimer # same goes for the weapon swap timer, use update_swaptime in a WeaponSlot to change the swap time for the weapon it's responsible for.
@@ -67,8 +68,9 @@ func update_timers():
 
 
 func start_swap_timer():
-	emit_signal("swapped", weapon_names[slot_idx], swap_timer.wait_time)
-	print_debug("swapped to %s" % [active_weapon.name])
+	var current_guntype = $Slots.get_child(slot_idx).gun_resource.guntype
+	emit_signal("swapped", weapon_names[current_guntype], swap_timer.wait_time)
+	print_debug("swapped to %s" % [active_weapon.get_parent().gun_resource.name])
 	swap_timer.start()
 	firerate_timer.stop()
 

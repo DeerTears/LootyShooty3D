@@ -3,8 +3,8 @@
 [ext_resource path="res://weapons/abstract/Weapon.gd" type="Script" id=1]
 [ext_resource path="res://weapons/interfaces/WeaponHandler.gd" type="Script" id=2]
 [ext_resource path="res://weapons/interfaces/WeaponSlot.gd" type="Script" id=3]
-[ext_resource path="res://weapons/saved/bland_pistol.tres" type="Resource" id=4]
-[ext_resource path="res://weapons/saved/bland_shotgun.tres" type="Resource" id=5]
+[ext_resource path="res://weapons/saved/bland_smg.tres" type="Resource" id=4]
+[ext_resource path="res://weapons/saved/secret_shotgun.tres" type="Resource" id=5]
 
 [node name="WeaponHandler" type="Spatial"]
 script = ExtResource( 2 )

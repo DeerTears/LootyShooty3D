@@ -6,6 +6,7 @@ class_name WeaponSlot
 # This Weapon can then be fired through this WeaponSlot's "shoot" method.
 
 export (Resource) var gun_resource = load("res://weapons/saved/inventory_placeholder.tres")
+var guntype
 
 onready var weapon = $Weapon
 
@@ -20,6 +21,7 @@ func shoot():
 
 func set_gun_resource(new_gun:Resource):
 	gun_resource = new_gun
+	guntype = gun_resource.guntype
 	# bug: update_pellet_count NEEDS to be called first, otherwise emitter damage, range, and accuracy aren't applied
 	weapon.update_pellet_count(gun_resource.pellet_count)
 	weapon.update_damage(gun_resource.damage)
