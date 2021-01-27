@@ -1,0 +1,171 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://menus/video.gd" type="Script" id=1]
+[ext_resource path="res://fonts/Header1.res" type="DynamicFont" id=2]
+[ext_resource path="res://menus/main.theme" type="Theme" id=3]
+
+[node name="Video" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 3 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 32
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 1248.0
+margin_bottom = 568.0
+custom_constants/separation = 16
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_right = 1216.0
+margin_bottom = 40.0
+custom_fonts/font = ExtResource( 2 )
+text = "Video"
+
+[node name="Fullscreen" type="CheckButton" parent="MarginContainer/VBoxContainer"]
+margin_top = 56.0
+margin_right = 171.0
+margin_bottom = 96.0
+size_flags_horizontal = 0
+text = "Fullscreen"
+
+[node name="DebugTrails" type="CheckButton" parent="MarginContainer/VBoxContainer"]
+margin_top = 112.0
+margin_right = 248.0
+margin_bottom = 152.0
+size_flags_horizontal = 2
+text = "Show Debug Trails"
+
+[node name="H1" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+margin_top = 168.0
+margin_right = 1216.0
+margin_bottom = 172.0
+
+[node name="RenderPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 188.0
+margin_right = 1216.0
+margin_bottom = 245.0
+
+[node name="HBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer/RenderPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1209.0
+margin_bottom = 50.0
+custom_constants/separation = 16
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/RenderPanel/HBox"]
+margin_right = 559.0
+margin_bottom = 43.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/RenderPanel/HBox/VBox"]
+margin_right = 559.0
+margin_bottom = 23.0
+text = "Render Downscale"
+align = 1
+
+[node name="RenderSlider" type="HSlider" parent="MarginContainer/VBoxContainer/RenderPanel/HBox/VBox"]
+margin_top = 27.0
+margin_right = 559.0
+margin_bottom = 43.0
+min_value = 1.0
+max_value = 5.0
+value = 1.0
+tick_count = 5
+ticks_on_borders = true
+
+[node name="RenderIndicator" type="Label" parent="MarginContainer/VBoxContainer/RenderPanel/HBox"]
+margin_left = 575.0
+margin_top = 10.0
+margin_right = 627.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 52, 0 )
+text = "0000"
+clip_text = true
+
+[node name="Dummy" type="Control" parent="MarginContainer/VBoxContainer/RenderPanel/HBox"]
+margin_left = 643.0
+margin_right = 1202.0
+margin_bottom = 43.0
+size_flags_horizontal = 3
+
+[node name="ShadowPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 261.0
+margin_right = 1216.0
+margin_bottom = 318.0
+
+[node name="HBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ShadowPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1209.0
+margin_bottom = 50.0
+custom_constants/separation = 16
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ShadowPanel/HBox"]
+margin_right = 559.0
+margin_bottom = 43.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ShadowPanel/HBox/VBox"]
+margin_right = 559.0
+margin_bottom = 23.0
+text = "Shadow Quality"
+align = 1
+
+[node name="ShadowSlider" type="HSlider" parent="MarginContainer/VBoxContainer/ShadowPanel/HBox/VBox"]
+margin_top = 27.0
+margin_right = 559.0
+margin_bottom = 43.0
+max_value = 4.0
+value = 1.0
+tick_count = 5
+ticks_on_borders = true
+
+[node name="ShadowIndicator" type="Label" parent="MarginContainer/VBoxContainer/ShadowPanel/HBox"]
+margin_left = 575.0
+margin_top = 10.0
+margin_right = 627.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 52, 0 )
+text = "0000"
+clip_text = true
+
+[node name="Dummy" type="Control" parent="MarginContainer/VBoxContainer/ShadowPanel/HBox"]
+margin_left = 643.0
+margin_right = 1202.0
+margin_bottom = 43.0
+size_flags_horizontal = 3
+
+[node name="BackButton" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 504.0
+margin_right = 1216.0
+margin_bottom = 536.0
+size_flags_vertical = 10
+
+[node name="Back" type="Button" parent="MarginContainer/VBoxContainer/BackButton"]
+margin_right = 134.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 134, 32 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Back"
+[connection signal="toggled" from="MarginContainer/VBoxContainer/Fullscreen" to="." method="_on_Fullscreen_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/DebugTrails" to="." method="_on_DebugTrails_toggled"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/RenderPanel/HBox/VBox/RenderSlider" to="." method="_on_RenderScale_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/ShadowPanel/HBox/VBox/ShadowSlider" to="." method="_on_ShadowQuality_value_changed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/BackButton/Back" to="." method="_on_Back_pressed"]

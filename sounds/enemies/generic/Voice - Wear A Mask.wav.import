@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Voice - Wear A Mask.wav-22abe55f6e0360c5fa9d24b07c16d48f.sample"
+
+[deps]
+
+source_file="res://sounds/enemies/generic/Voice - Wear A Mask.wav"
+dest_files=[ "res://.import/Voice - Wear A Mask.wav-22abe55f6e0360c5fa9d24b07c16d48f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -39,4 +39,4 @@ func change_state(new_state:int):
 		DEAD:
 			$Head/AnimationPlayer.play("Dead")
 			yield($Head/AnimationPlayer,"animation_finished")
-			queue_free()
+			die()

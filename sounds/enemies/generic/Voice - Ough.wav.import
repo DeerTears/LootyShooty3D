@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Voice - Ough.wav-bcc73509b5fb2e76821331b2ba1d0514.sample"
+
+[deps]
+
+source_file="res://sounds/enemies/generic/Voice - Ough.wav"
+dest_files=[ "res://.import/Voice - Ough.wav-bcc73509b5fb2e76821331b2ba1d0514.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

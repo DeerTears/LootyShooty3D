@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Voice - Happy New Year.wav-3f67dfcce678128b70754c12923ad48e.sample"
+
+[deps]
+
+source_file="res://sounds/enemies/generic/Voice - Happy New Year.wav"
+dest_files=[ "res://.import/Voice - Happy New Year.wav-3f67dfcce678128b70754c12923ad48e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop=false
+compress/mode=0

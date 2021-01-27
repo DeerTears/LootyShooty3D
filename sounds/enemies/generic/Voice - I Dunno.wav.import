@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Voice - I Dunno.wav-a06d75e942acb747ac81e96b31c5345d.sample"
+
+[deps]
+
+source_file="res://sounds/enemies/generic/Voice - I Dunno.wav"
+dest_files=[ "res://.import/Voice - I Dunno.wav-a06d75e942acb747ac81e96b31c5345d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

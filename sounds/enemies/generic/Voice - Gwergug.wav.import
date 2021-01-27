@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Voice - Gwergug.wav-a977c54045a19a06a10b29b6fd840729.sample"
+
+[deps]
+
+source_file="res://sounds/enemies/generic/Voice - Gwergug.wav"
+dest_files=[ "res://.import/Voice - Gwergug.wav-a977c54045a19a06a10b29b6fd840729.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

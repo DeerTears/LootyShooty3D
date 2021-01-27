@@ -1,12 +1,15 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://actors/Player.gd" type="Script" id=1]
 [ext_resource path="res://models/pistol/pistol.tscn" type="PackedScene" id=2]
 [ext_resource path="res://weapons/interfaces/WeaponHandler.tscn" type="PackedScene" id=3]
 [ext_resource path="res://control/hud/hud.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/randomAudioStreamPlayer/random_audio_stream_player.gd" type="Script" id=5]
 [ext_resource path="res://models/shotgun/shotgun.tscn" type="PackedScene" id=6]
 [ext_resource path="res://models/smg/smg.tscn" type="PackedScene" id=7]
 [ext_resource path="res://models/sniper/sniper.tscn" type="PackedScene" id=8]
+[ext_resource path="res://sounds/guns/smg_light.wav" type="AudioStream" id=9]
+[ext_resource path="res://sounds/guns/smg_heavy.wav" type="AudioStream" id=10]
 
 [sub_resource type="Animation" id=1]
 resource_name = "FirePistol"
@@ -215,6 +218,22 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 shape = SubResource( 9 )
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Guns" type="Node" parent="Sounds"]
+
+[node name="ShootSMG" type="AudioStreamPlayer" parent="Sounds/Guns"]
+volume_db = -2.0
+script = ExtResource( 5 )
+streams = [ ExtResource( 9 ), ExtResource( 10 ) ]
+random_strategy = 0
+randomize_volume = false
+volume_min = 0.0
+volume_max = 0.0
+randomize_pitch = false
+pitch_min = 1.0
+pitch_max = 1.0
 [connection signal="fired" from="Head/WeaponHandler" to="." method="on_weapon_fired"]
 [connection signal="swapped" from="Head/WeaponHandler" to="." method="on_weapon_swapped"]
 [connection signal="body_entered" from="PickupArea" to="." method="_on_PickupArea_body_entered"]

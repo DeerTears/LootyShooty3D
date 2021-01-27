@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Thud 3.wav-1715b8f1836d86c3c03a5dc04030b984.sample"
+
+[deps]
+
+source_file="res://sounds/enemies/generic/Thud 3.wav"
+dest_files=[ "res://.import/Thud 3.wav-1715b8f1836d86c3c03a5dc04030b984.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
