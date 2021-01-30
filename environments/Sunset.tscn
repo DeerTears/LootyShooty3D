@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="ProceduralSky" id=1]
+sky_top_color = Color( 0.945098, 0.756863, 0.466667, 1 )
+sky_horizon_color = Color( 0.788235, 0.866667, 0.686275, 1 )
+ground_bottom_color = Color( 0.176471, 0.360784, 0.619608, 1 )
+ground_horizon_color = Color( 0.788235, 0.866667, 0.686275, 1 )
+sun_color = Color( 1, 0.823529, 0.592157, 1 )
+sun_latitude = 7.0
+sun_angle_min = 7.0
+sun_angle_max = 35.0
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+ambient_light_color = Color( 0.5, 0.398, 0.245, 1 )
+ambient_light_sky_contribution = 0.0
+tonemap_mode = 3
+tonemap_exposure = 1.05
+tonemap_white = 3.0
+adjustment_enabled = true
+
+[node name="Sunset" type="WorldEnvironment"]
+environment = SubResource( 2 )
+
+[node name="Sun" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -0.992546, 0.121869, 0, -0.121869, -0.992546, 0, 2, 0 )

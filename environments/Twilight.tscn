@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="ProceduralSky" id=1]
+sky_top_color = Color( 0.192157, 0.247059, 0.407843, 1 )
+sky_horizon_color = Color( 0.368627, 0.603922, 0.878431, 1 )
+sky_curve = 0.221606
+ground_bottom_color = Color( 0.156863, 0.156863, 0.156863, 1 )
+ground_horizon_color = Color( 0.556863, 0.556863, 0.556863, 1 )
+sun_latitude = -15.0
+sun_longitude = 180.0
+sun_angle_min = 10.0
+sun_angle_max = 360.0
+sun_curve = 1.0
+sun_energy = 0.0
+texture_size = 1
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+ambient_light_color = Color( 0.137255, 0.137255, 0.137255, 1 )
+ambient_light_sky_contribution = 0.5
+
+[node name="Twilight" type="WorldEnvironment"]
+environment = SubResource( 2 )
+
+[node name="Sun" type="DirectionalLight" parent="."]
+transform = Transform( -1, 2.83989e-08, -3.24601e-07, 0, 0.996195, 0.0871557, 3.25841e-07, 0.0871557, -0.996195, 0, 0, 0 )
+light_energy = 0.8
+shadow_enabled = true

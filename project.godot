@@ -70,7 +70,7 @@ window/size/test_height=480
 
 [editor_plugins]
 
-enabled=PoolStringArray( "randomAudioStreamPlayer" )
+enabled=PoolStringArray( "quickenv", "randomAudioStreamPlayer" )
 
 [input]
 
