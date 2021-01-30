@@ -4,6 +4,8 @@ This game uses a gun model pack that uses a CC Attribution 4.0 license:
 
 "Low Poly Weapons" (https://skfb.ly/6RwMM) by Gunnar Correa is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 
+There's also pacdev's low-poly CC0 gunpack that I used for this project: https://pacdev.itch.io/lowpoly-weapon
+
 # Overview of Folders and Contents
 
 I like writing documentation, and it's a good excuse to help me find stuff I've forgotten about that needs refactoring.
@@ -60,19 +62,25 @@ Initially made to work with a terrain addon but turns out my IGP doesn't like me
 - blood
 - crosshairs
 
-- images: outdated loot effect, will be removed eventually
+- images
+outdated loot effect, will be removed eventually
 
-- impacts: particles for the ShockwaveEnemy's area attack
+- impacts
+particles for the ShockwaveEnemy's area attack
 
-- loot: light beams and other particles for dropped guns
+- loot
+light beams and other particles for dropped guns
 - muzzleflash
-- smoke: when enemies die, these particles are used to cause a puff of smoke before they're despawned. they also use this same particle to attack.
+- smoke
+when enemies die, these particles are used to cause a puff of smoke before they're despawned. they also use this same particle to attack.
 
 ## Singletons
 
-- gameinfo: Contains player position that enemies follow.
+- gameinfo
+Contains player position that enemies follow.  
 Likely to be changed in the future if I get navigationmesh working.
-- settings: To carry audio/video quality settings across the menus and into the game.
+- settings
+To carry audio/video quality settings across the menus and into the game.
 
 ## Sounds
 
@@ -83,15 +91,19 @@ Likely to be changed in the future if I get navigationmesh working.
 
 The motherload folder and kinda the focus of this project.
 
-- abstract: This folder contains Superclasses, and the script for the new Resource-type "gun".
+- abstract
+This folder contains Superclasses, and the script for the new Resource-type "gun".
 This folder contains Weapon.gd (used by WeaponSlot) and Gun.gd (extended by any instances of gun_resource in the code)
 
-- classes: Contains now-depreciated code for each guntype.
+- classes
+Contains now-depreciated code for each guntype.
 This could be re-instated as .res files, to be a series of defaults for each guntype if we do a levelling system.
 
-- components: Parts of guns such as the BulletEmitter, the world-spawned ItemBody that appears when you drop a gun, and some other stuff that is really hard to keep track of. :s
+- components
+Parts of guns such as the BulletEmitter, the world-spawned ItemBody that appears when you drop a gun, and some other stuff that is really hard to keep track of. :s
 
-- interfaces: Handles input and passes signals around to produce raycasts and starts animations.
+- interfaces
+Handles input and passes signals around to produce raycasts and starts animations.
 
 AnimationHandler, WeaponHandler, and WeaponSlot live here. 
 
