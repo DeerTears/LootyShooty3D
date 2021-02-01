@@ -25,6 +25,10 @@ func _ready():
 	update_timers()
 	start_swap_timer()
 	emit_signal("swapped","Pistol", active_weapon.swap_time)
+	pick_random_weapons()
+
+func pick_random_weapons():
+	pass
 
 func update_inventory_size():
 	inventory_size = $Slots.get_child_count()

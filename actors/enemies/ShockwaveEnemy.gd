@@ -6,7 +6,8 @@ func change_state(new_state:int):
 		IDLE:
 			pass
 		ENGAGE:
-			$Sounds/Laughs.play()
+#			$Sounds/Laughs.play()
+			pass
 		BACK_AWAY:
 			random_misdirection_phi = rand_range(0.0,1.1745329)
 			yield(get_tree().create_timer(1.2),"timeout")
@@ -23,16 +24,17 @@ func change_state(new_state:int):
 				return
 			loot_claimed = true
 			if 1 == 1: # todo: if we should drop a gun...
-				$GunDropper.direction = -transform.basis.z
-				$GunDropper.drop_random_gun()
+#				$GunDropper.direction = -transform.basis.z
+#				$GunDropper.drop_random_gun()
+				pass
 			$PresenceDetector/CollisionShape.disabled = true
 #			$PlayerDetector/CollisionShape.disabled = true
 			self.set_collision_layer_bit(3,false)
 			self.set_collision_mask_bit(1, false)
 			self.set_collision_mask_bit(3, false)
-			$AnimationPlayer.play("Die")
-			$Sounds/Die.play()
-			yield($AnimationPlayer,"animation_finished")
+#			$AnimationPlayer.play("Die")
+#			$Sounds/Die.play()
+#			yield($AnimationPlayer,"animation_finished")
 			queue_free()
 
 func hurt(damage:int):
@@ -43,8 +45,9 @@ func hurt(damage:int):
 		change_state(DEAD)
 		return
 	else:
-		$AnimationPlayer.play("Hurt")
-		if $Sounds/Hurt.playing == false:
-			$Sounds/Hurt.play()
+#		$AnimationPlayer.play("Hurt")
+#		if $Sounds/Hurt.playing == false:
+#			$Sounds/Hurt.play()
+		pass
 	if state == IDLE:
 		change_state(ENGAGE)
