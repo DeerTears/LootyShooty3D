@@ -1,6 +1,6 @@
 extends Actor
 
-class_name Enemy
+class_name EnemyMelee
 
 enum {
 	IDLE,

@@ -1,6 +1,6 @@
 [gd_scene load_steps=60 format=2]
 
-[ext_resource path="res://actors/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://actors/EnemyMelee.gd" type="Script" id=1]
 [ext_resource path="res://particles/blood/dingbats-420.png" type="Texture" id=2]
 [ext_resource path="res://particles/smoke/ExplosionFog-Texture-2.png" type="Texture" id=3]
 [ext_resource path="res://weapons/components/GunDropper.tscn" type="PackedScene" id=4]
@@ -84,7 +84,7 @@ albedo_texture = ExtResource( 2 )
 [sub_resource type="QuadMesh" id=10]
 material = SubResource( 9 )
 
-[sub_resource type="AnimatedTexture" id=29]
+[sub_resource type="AnimatedTexture" id=11]
 flags = 23
 frames = 4
 fps = 15.0
@@ -96,7 +96,7 @@ frame_2/delay_sec = 0.0
 frame_3/texture = ExtResource( 2 )
 frame_3/delay_sec = 0.0
 
-[sub_resource type="SpatialMaterial" id=26]
+[sub_resource type="SpatialMaterial" id=12]
 flags_transparent = true
 flags_vertex_lighting = true
 vertex_color_use_as_albedo = true
@@ -104,34 +104,34 @@ params_billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
-albedo_texture = SubResource( 29 )
+albedo_texture = SubResource( 11 )
 
-[sub_resource type="QuadMesh" id=27]
-material = SubResource( 26 )
+[sub_resource type="QuadMesh" id=13]
+material = SubResource( 12 )
 
-[sub_resource type="Curve" id=28]
+[sub_resource type="Curve" id=14]
 max_value = 2.0
 _data = [ Vector2( 0, 0.634091 ), 0.0, 0.0, 0, 0, Vector2( 1, 2 ), 0.76281, 0.0, 0, 0 ]
 
-[sub_resource type="Gradient" id=30]
+[sub_resource type="Gradient" id=15]
 offsets = PoolRealArray( 0.815126, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="CylinderMesh" id=11]
+[sub_resource type="CylinderMesh" id=16]
 material = ExtResource( 6 )
 top_radius = 1.1
 bottom_radius = 1.1
 radial_segments = 16
 rings = 1
 
-[sub_resource type="SpatialMaterial" id=12]
+[sub_resource type="SpatialMaterial" id=17]
 albedo_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="QuadMesh" id=13]
-material = SubResource( 12 )
+[sub_resource type="QuadMesh" id=18]
+material = SubResource( 17 )
 size = Vector2( 1, 0.5 )
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=19]
 length = 3.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Mesh:rotation_degrees")
@@ -194,7 +194,7 @@ tracks/4/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=20]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Mesh:rotation_degrees")
@@ -233,7 +233,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=21]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Mesh:rotation_degrees")
 tracks/0/interp = 1
@@ -295,20 +295,20 @@ tracks/4/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Gradient" id=17]
+[sub_resource type="Gradient" id=22]
 offsets = PoolRealArray( 0.394558, 1 )
 colors = PoolColorArray( 0.431373, 0.431373, 0.431373, 1, 0.431373, 0.431373, 0.431373, 0 )
 
-[sub_resource type="GradientTexture" id=18]
-gradient = SubResource( 17 )
+[sub_resource type="GradientTexture" id=23]
+gradient = SubResource( 22 )
 
-[sub_resource type="Curve" id=19]
+[sub_resource type="Curve" id=24]
 _data = [ Vector2( 0, 0.529545 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=20]
-curve = SubResource( 19 )
+[sub_resource type="CurveTexture" id=25]
+curve = SubResource( 24 )
 
-[sub_resource type="ParticlesMaterial" id=21]
+[sub_resource type="ParticlesMaterial" id=26]
 emission_shape = 1
 emission_sphere_radius = 1.0
 direction = Vector3( 0, 1, 0 )
@@ -320,10 +320,10 @@ angle = 5.0
 angle_random = 1.0
 scale = 6.0
 scale_random = 0.2
-scale_curve = SubResource( 20 )
-color_ramp = SubResource( 18 )
+scale_curve = SubResource( 25 )
+color_ramp = SubResource( 23 )
 
-[sub_resource type="SpatialMaterial" id=22]
+[sub_resource type="SpatialMaterial" id=27]
 flags_transparent = true
 flags_unshaded = true
 vertex_color_use_as_albedo = true
@@ -333,13 +333,13 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 albedo_texture = ExtResource( 3 )
 
-[sub_resource type="QuadMesh" id=23]
-material = SubResource( 22 )
+[sub_resource type="QuadMesh" id=28]
+material = SubResource( 27 )
 
-[sub_resource type="SphereShape" id=24]
+[sub_resource type="SphereShape" id=29]
 radius = 3.0
 
-[sub_resource type="CylinderShape" id=25]
+[sub_resource type="CylinderShape" id=30]
 radius = 60.0
 height = 32.0
 
@@ -386,7 +386,7 @@ one_shot = true
 preprocess = 0.05
 explosiveness = 1.0
 draw_order = 2
-mesh = SubResource( 27 )
+mesh = SubResource( 13 )
 emission_shape = 4
 emission_points = PoolVector3Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
 emission_normals = PoolVector3Array(  )
@@ -399,29 +399,29 @@ damping = 50.0
 angle = 360.0
 angle_random = 1.0
 scale_amount = 1.5
-scale_amount_curve = SubResource( 28 )
-color_ramp = SubResource( 30 )
+scale_amount_curve = SubResource( 14 )
+color_ramp = SubResource( 15 )
 anim_speed = 1.0
 anim_offset = 1.0
 anim_offset_random = 1.0
 
 [node name="Ring" type="MeshInstance" parent="Mesh"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1.31134e-08, 0.3 )
-mesh = SubResource( 11 )
+mesh = SubResource( 16 )
 material/0 = null
 
 [node name="Eyes" type="MeshInstance" parent="Mesh"]
 transform = Transform( -1, -3.25841e-07, 5.30863e-14, 0, -1.62921e-07, -1, 3.25841e-07, -1, 1.62921e-07, 0, -0.9, -1.7 )
-mesh = SubResource( 13 )
+mesh = SubResource( 18 )
 material/0 = null
 
 [node name="GunDropper" parent="." instance=ExtResource( 4 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
-anims/Die = SubResource( 14 )
-anims/Hurt = SubResource( 15 )
-anims/Idle = SubResource( 16 )
+anims/Die = SubResource( 19 )
+anims/Hurt = SubResource( 20 )
+anims/Idle = SubResource( 21 )
 
 [node name="Poof" type="Particles" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0 )
@@ -430,8 +430,8 @@ amount = 32
 one_shot = true
 preprocess = 0.1
 explosiveness = 0.8
-process_material = SubResource( 21 )
-draw_pass_1 = SubResource( 23 )
+process_material = SubResource( 26 )
+draw_pass_1 = SubResource( 28 )
 
 [node name="StateTimer" type="Timer" parent="."]
 
@@ -441,7 +441,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="PlayerDetector"]
-shape = SubResource( 24 )
+shape = SubResource( 29 )
 
 [node name="PresenceDetector" type="Area" parent="."]
 monitorable = false
@@ -449,7 +449,7 @@ collision_layer = 0
 collision_mask = 2147483650
 
 [node name="CollisionShape" type="CollisionShape" parent="PresenceDetector"]
-shape = SubResource( 25 )
+shape = SubResource( 30 )
 
 [node name="RayCast" type="RayCast" parent="."]
 enabled = true

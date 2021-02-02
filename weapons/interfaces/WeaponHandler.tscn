@@ -4,7 +4,7 @@
 [ext_resource path="res://weapons/interfaces/WeaponHandler.gd" type="Script" id=2]
 [ext_resource path="res://weapons/interfaces/WeaponSlot.gd" type="Script" id=3]
 [ext_resource path="res://weapons/saved/bland_smg.tres" type="Resource" id=4]
-[ext_resource path="res://weapons/saved/secret_shotgun.tres" type="Resource" id=5]
+[ext_resource path="res://weapons/saved/amazing_sniper.tres" type="Resource" id=5]
 
 [node name="WeaponHandler" type="Spatial"]
 script = ExtResource( 2 )
@@ -13,14 +13,14 @@ script = ExtResource( 2 )
 
 [node name="WeaponSlot0" type="Spatial" parent="Slots"]
 script = ExtResource( 3 )
-gun_resource = ExtResource( 4 )
+gun_resource = ExtResource( 5 )
 
 [node name="Weapon" type="Spatial" parent="Slots/WeaponSlot0"]
 script = ExtResource( 1 )
 
 [node name="WeaponSlot1" type="Spatial" parent="Slots"]
 script = ExtResource( 3 )
-gun_resource = ExtResource( 5 )
+gun_resource = ExtResource( 4 )
 
 [node name="Weapon" type="Spatial" parent="Slots/WeaponSlot1"]
 script = ExtResource( 1 )

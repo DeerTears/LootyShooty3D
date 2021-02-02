@@ -1,0 +1,102 @@
+[gd_scene load_steps=10 format=2]
+
+[sub_resource type="SphereMesh" id=1]
+radius = 0.5
+height = 1.0
+radial_segments = 4
+rings = 2
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_transparent = true
+flags_vertex_lighting = true
+vertex_color_use_as_albedo = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id=3]
+material = SubResource( 2 )
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.109091, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -2.12636, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.130952, 0.337302, 0.583333, 0.710317, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 0.935486, 0.5625, 1, 1, 0.735352, 0, 1, 0.855469, 0, 0, 1, 0.335938, 0, 0, 1, 0, 0, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=6]
+flags_transparent = true
+flags_vertex_lighting = true
+vertex_color_use_as_albedo = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 1, 0.74902, 0, 1 )
+
+[sub_resource type="QuadMesh" id=7]
+material = SubResource( 6 )
+
+[sub_resource type="Curve" id=8]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.247273, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CylinderMesh" id=9]
+top_radius = 0.3
+bottom_radius = 0.1
+height = 1.0
+radial_segments = 6
+rings = 1
+
+[node name="Torch" type="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 4, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="Ember" type="CPUParticles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 1.3, 0 )
+amount = 6
+lifetime = 4.0
+explosiveness = 0.2
+randomness = 0.7
+draw_order = 2
+mesh = SubResource( 3 )
+direction = Vector3( 0, 1, 0 )
+spread = 180.0
+gravity = Vector3( 0, 1, 0 )
+initial_velocity = 0.2
+radial_accel = -0.5
+tangential_accel = 1.5
+tangential_accel_random = 0.9
+angle = 360.0
+angle_random = 1.0
+scale_amount = 0.25
+scale_amount_random = 0.25
+scale_amount_curve = SubResource( 4 )
+color_ramp = SubResource( 5 )
+
+[node name="Fire" type="CPUParticles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, 1.3, 0 )
+draw_order = 2
+mesh = SubResource( 7 )
+direction = Vector3( 0, 1, 0 )
+gravity = Vector3( 0, 1, 0 )
+initial_velocity = 2.0
+linear_accel = 3.0
+angle = 360.0
+angle_random = 1.0
+scale_amount = 1.5
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 8 )
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 1.6, 0 )
+light_color = Color( 1, 0.639216, 0.215686, 1 )
+light_energy = 3.0
+omni_range = 14.0
+omni_attenuation = 1.5
+
+[node name="Beam" type="MeshInstance" parent="."]
+transform = Transform( 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, 0.5, 0.7, 0 )
+mesh = SubResource( 9 )
+material/0 = null

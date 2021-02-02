@@ -1,7 +1,7 @@
 extends KinematicBody
 
 class_name Actor
-
+export (Resource) var character_profile
 var health = 100
 var max_health = 100
 

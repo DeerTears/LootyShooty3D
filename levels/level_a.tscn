@@ -3,7 +3,7 @@
 [ext_resource path="res://actors/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://weapons/components/ItemBody.tscn" type="PackedScene" id=3]
-[ext_resource path="res://actors/Enemy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://actors/EnemyMelee.tscn" type="PackedScene" id=4]
 [ext_resource path="res://actors/Spawner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://actors/Turret.tscn" type="PackedScene" id=6]
 [ext_resource path="res://actors/ShockwaveEnemy.tscn" type="PackedScene" id=7]
@@ -177,6 +177,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -77.9075, 23.1945, 248.18 )
 
 [node name="Spawner" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -49.3192, 10.8017, 261.889 )
+scene_path_to_spawn = "res://actors/EnemyMelee.tscn"
 lifetime_copies = 10
 
 [node name="Turret" parent="." instance=ExtResource( 6 )]

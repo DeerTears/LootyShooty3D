@@ -1,4 +1,4 @@
-extends Enemy
+extends EnemyMelee
 
 func change_state(new_state:int):
 	state = new_state

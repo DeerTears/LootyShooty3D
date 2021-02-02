@@ -12,12 +12,17 @@ _global_script_classes=[ {
 "base": "KinematicBody",
 "class": "Actor",
 "language": "GDScript",
-"path": "res://actors/Actor.gd"
+"path": "res://actors/abstract/Actor.gd"
 }, {
 "base": "Actor",
 "class": "Enemy",
 "language": "GDScript",
-"path": "res://actors/Enemy.gd"
+"path": "res://actors/abstract/Enemy.gd"
+}, {
+"base": "Actor",
+"class": "EnemyMelee",
+"language": "GDScript",
+"path": "res://actors/EnemyMelee.gd"
 }, {
 "base": "Spatial",
 "class": "Weapon",
@@ -42,6 +47,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Actor": "",
 "Enemy": "",
+"EnemyMelee": "",
 "Weapon": "",
 "WeaponSlot": "",
 "gun": "",
@@ -51,7 +57,7 @@ _global_script_class_icons={
 [application]
 
 config/name="LootyShooty3D"
-run/main_scene="res://levels/level_a.tscn"
+run/main_scene="res://levels/barracks.tscn"
 config/icon="res://icon.png"
 
 [autoload]

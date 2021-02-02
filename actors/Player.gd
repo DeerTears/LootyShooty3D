@@ -1,6 +1,7 @@
 extends Actor
 
 # selecting and picking guns
+
 var new_item_selected
 
 # character controller
@@ -25,6 +26,8 @@ func _ready():
 	$Mesh/EditorArrow.hide()
 	$HUD/CenterContainer/PickupNotice.hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	if character_profile != null:
+		print("no character profile!")
 
 func _on_PickupArea_body_entered(body):
 	if "gun_resource" in body:

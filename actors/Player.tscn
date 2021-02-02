@@ -193,6 +193,7 @@ material/0 = null
 
 [node name="EditorArrow" type="MeshInstance" parent="Mesh"]
 transform = Transform( 1, 0, 0, 0, -0.996195, 0.0871554, 0, -0.0871554, -0.996195, 0, -3, -1 )
+visible = false
 mesh = SubResource( 6 )
 material/0 = null
 

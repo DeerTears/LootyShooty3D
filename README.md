@@ -1,6 +1,6 @@
 # LootyShooty3D
 
-This game uses a gun model pack that uses a CC Attribution 4.0 license:
+"Texture Pack: Photoscanned 01" (https://juliovii.itch.io/pspk01) by JulioVII is licensed under Creative Commons Attribution 2.0 Generic (https://creativecommons.org/licenses/by/2.0/).
 
 "Low Poly Weapons" (https://skfb.ly/6RwMM) by Gunnar Correa is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 
@@ -14,9 +14,15 @@ I like writing documentation, and it's a good excuse to help me find stuff I've 
 
 A bit of a misnomer, does not always contain scripts that extend `Actor.gd`.
 
+- abstract
+contains actor.gd and the extending enemy.gd classes
 - Player
-- Basic melee Enemy
+extends actor.gd
+- EnemyMelee
+extends enemy.gd
+
 Has an uncoupled statemachine to handle chasing the player, retreating, and dying. 
+
 - Shockwave-type enemy
 - Spawner
 This spawner works with anything but it was designed for enemies. It can limit how many scenes it spawns by looking at its child count. Do not add children to this.
@@ -49,7 +55,7 @@ Scenes that contain geometry and instances of objects. Hopefully every level can
 
 ## Materials
 
-Initially made to work with a terrain addon but turns out my IGP doesn't like me running GLES3 Godot plugins, so it's completely unusable to me. May delete or rework this folder in the future.
+Initially I set this up to work with a terrain addon but turns out my IGP doesn't like me running GLES3 Godot plugins, so it's completely unusable to me. May delete or rework this folder in the future.
 
 - Actors
 - Earth
@@ -100,7 +106,7 @@ Contains now-depreciated code for each guntype.
 This could be re-instated as .res files, to be a series of defaults for each guntype if we do a levelling system.
 
 - components
-Parts of guns such as the BulletEmitter, the world-spawned ItemBody that appears when you drop a gun, and some other stuff that is really hard to keep track of. :s
+Parts of guns such as the BulletEmitter, the world-spawned ItemBody that appears when you drop a gun, and other stuff
 
 - interfaces
 Handles input and passes signals around to produce raycasts and starts animations.
@@ -129,7 +135,7 @@ Okay, now that I've covered the contents of this project, I'd like to throw this
 
 ## Actor Refactors
 
-- `Enemy.gd` should be renamed to `EnemyMelee.gd`
+~~- `Enemy.gd` should be renamed to `EnemyMelee.gd`~~
 - `Enemy.gd` should become an extends for all types of enemies.
 There are too many differences between the Player and Enemies to try and share them in `Actor.gd` where all living things currently extend from.
 - `actors/components` should carry GunDropper.tscn
@@ -148,7 +154,7 @@ I'm planning on converting this project to GLES2, all Particles nodes will event
 
 Blood could have an actual animated texture instead of random blood textures cycling in the particle.
 
-Remove `/images`
+~~Remove `/images`~~
 
 ## Sound Refactors
 
@@ -167,10 +173,10 @@ These folder names made sense to me after reading that book about the Strategy P
 
 While we're thinking of new folder names:
 
-- Get rid of `PistolCode.tscn & .gd`
+~~- Get rid of `PistolCode.tscn & .gd`~~
 - Move `GunDropper.tscn & .gd` into `actors/components/`
 - Move `ItemBody.tscn & .gd` into `weapons/`?
-- Check if `FirerateTimer.tscn` still needs to exist?
+~~- Check if `FirerateTimer.tscn` still needs to exist?~~
 - Could we move the only-needed `BulletEmitter.tscn & .gd` and `ItemBody.tscsn & .gd` from `weapons/components` into `weapons/abstract`?
 
 And then consider, instead of:
