@@ -11,7 +11,8 @@ extents = Vector3( 8, 2, 4 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "Flash"
-length = 3.0
+length = 8.0
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("MeshInstance:material_override:shader_param/emission_energy")
 tracks/0/interp = 1
@@ -19,15 +20,42 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.5, 3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 1, 2, 3, 4.5, 6, 8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 0.66, 1.66, 1 ),
 "update": 0,
-"values": [ 1.5, -0.01, 1.0 ]
+"values": [ 0.0, 1.5, 3.0, 1.5, 0.0, -0.1, 0.0 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hurt_last_body"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:lava_active")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.4, 4.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [node name="TimedLava" type="Area"]
 collision_mask = 31
 script = ExtResource( 2 )
+lava_active = true
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 material_override = ExtResource( 1 )
@@ -46,9 +74,8 @@ shape = SubResource( 2 )
 [node name="HurtTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( -1, 1.11444e-07, -3.06191e-07, 0, 0.939693, 0.34202, 3.25841e-07, 0.34202, -0.939693, -1, 4.4, -12 )
-
-[node name="wip" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Flash"
 anims/Flash = SubResource( 3 )
 [connection signal="body_entered" from="." to="." method="on_body_entered"]
+[connection signal="body_exited" from="." to="." method="on_body_exited"]

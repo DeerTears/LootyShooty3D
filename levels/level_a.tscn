@@ -155,7 +155,7 @@ collision_mask = 0
 shape = SubResource( 11 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( -0.924765, 0, 0.380538, 0, 1, 0, -0.380538, 0, -0.924765, 63.6238, 2.19573, 175.369 )
+transform = Transform( -0.924765, 0, 0.380538, 0, 1, 0, -0.380538, 0, -0.924765, -23.3018, 1.86282, 237.247 )
 
 [node name="ItemBody" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5815, 37.4467, -166.168 )

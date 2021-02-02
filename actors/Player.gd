@@ -5,9 +5,9 @@ extends Actor
 var new_item_selected
 
 # character controller
-var h_acceleration = 3
+var horizontal_acceleration = 3
 var air_acceleration = 1
-var normal_acceleration = 7
+var default_acceleration = 7
 var gravity = 26
 var jump = 18
 var full_contact = false
@@ -16,7 +16,7 @@ var alive: bool = true
 onready var pickup_notice = $HUD/CenterContainer/PickupNotice
 export var mouse_sensitivity = 0.15
 
-var h_velocity = Vector3()
+var horizontal_velocity = Vector3()
 
 onready var head = $Head
 onready var ground_check = $GroundCheck
@@ -26,8 +26,16 @@ func _ready():
 	$Mesh/EditorArrow.hide()
 	$HUD/CenterContainer/PickupNotice.hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	if character_profile != null:
+	if character_profile == null:
 		print("no character profile!")
+	else:
+		speed = character_profile.speed
+		health = character_profile.health
+		max_health = character_profile.max_health
+		jump = character_profile.jump
+		air_acceleration = character_profile.air_acceleration
+		default_acceleration = character_profile.default_acceleration
+		gravity = character_profile.gravity
 
 func _on_PickupArea_body_entered(body):
 	if "gun_resource" in body:
@@ -74,13 +82,13 @@ func _physics_process(delta):
 	full_contact = ground_check.is_colliding()
 	if not is_on_floor():
 		gravity_vec += Vector3.DOWN * gravity * delta
-		h_acceleration = air_acceleration
+		horizontal_acceleration = air_acceleration
 	elif is_on_floor() and full_contact:
 		gravity_vec = -get_floor_normal() * gravity
-		h_acceleration = normal_acceleration
+		horizontal_acceleration = default_acceleration
 	else:
 		gravity_vec = -get_floor_normal()
-		h_acceleration = normal_acceleration
+		horizontal_acceleration = default_acceleration
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or ground_check.is_colliding()):
 		gravity_vec = Vector3.UP * jump
 	if Input.is_action_pressed("move_forward"):
@@ -94,9 +102,9 @@ func _physics_process(delta):
 	if not alive:
 		direction = Vector3.ZERO
 	direction = direction.normalized()
-	h_velocity = h_velocity.linear_interpolate(direction * speed, h_acceleration * delta)
-	velocity.z = h_velocity.z + gravity_vec.z
-	velocity.x = h_velocity.x + gravity_vec.x
+	horizontal_velocity = horizontal_velocity.linear_interpolate(direction * speed, horizontal_acceleration * delta)
+	velocity.z = horizontal_velocity.z + gravity_vec.z
+	velocity.x = horizontal_velocity.x + gravity_vec.x
 	velocity.y = gravity_vec.y
 	move_and_slide(velocity, Vector3.UP)
 	GameInfo.player_position = global_transform.origin

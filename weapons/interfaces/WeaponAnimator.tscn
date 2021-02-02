@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://models/pistol/pistol.tscn" type="PackedScene" id=1]
 [ext_resource path="res://models/shotgun/shotgun.tscn" type="PackedScene" id=2]
@@ -8,6 +8,11 @@
 [ext_resource path="res://models/source/sg0_receiver.material" type="Material" id=6]
 [ext_resource path="res://models/source/rf0_wood.material" type="Material" id=7]
 [ext_resource path="res://models/source/rf0_metal.material" type="Material" id=8]
+[ext_resource path="res://weapons/interfaces/WeaponAnimator.gd" type="Script" id=9]
+[ext_resource path="res://sounds/guns/shotgun_heavy.wav" type="AudioStream" id=10]
+[ext_resource path="res://sounds/guns/sniper_heavy.wav" type="AudioStream" id=11]
+[ext_resource path="res://sounds/guns/pistol_heavy.wav" type="AudioStream" id=12]
+[ext_resource path="res://sounds/guns/smg_light.wav" type="AudioStream" id=13]
 
 [sub_resource type="SpatialMaterial" id=1]
 resource_name = "hg0.metal"
@@ -244,12 +249,13 @@ tracks/1/keys = {
 }
 
 [node name="WeaponAnimator" type="Spatial"]
+script = ExtResource( 9 )
 
 [node name="Camera" type="Camera" parent="."]
 far = 300.0
 
 [node name="Viewmodel" type="Spatial" parent="Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01 )
+transform = Transform( 1, 0, 0, 0, 0.970031, -0.24298, 0, 0.24298, 0.970031, 0, 0, 0.028125 )
 
 [node name="PistolMesh" parent="Camera/Viewmodel" instance=ExtResource( 1 )]
 transform = Transform( -0.1, 0, 1.50996e-08, 0, 0.1, 0, -1.50996e-08, 0, -0.1, 0.11, -0.07, -0.2 )
@@ -276,3 +282,25 @@ anims/FirePistol = SubResource( 7 )
 anims/FireSMG = SubResource( 8 )
 anims/IdlePistol = SubResource( 9 )
 anims/ReadyPistol = SubResource( 10 )
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Pistol" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 12 )
+pitch_scale = 0.9
+bus = "PlayerGuns"
+
+[node name="Shotgun" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 10 )
+pitch_scale = 1.2
+bus = "PlayerGuns"
+
+[node name="Sniper" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 11 )
+pitch_scale = 1.29
+bus = "PlayerGuns"
+
+[node name="SMG" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 13 )
+pitch_scale = 1.46
+bus = "PlayerGuns"

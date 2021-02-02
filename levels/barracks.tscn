@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://levels/features/Torch.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/Player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://materials/Stone/stylized_round_stones_in_concrete_Roughness.png" type="Texture" id=5]
 [ext_resource path="res://materials/Dungeon/Sidewalk/sidewalk.material" type="Material" id=6]
 [ext_resource path="res://levels/features/TimedLava.tscn" type="PackedScene" id=7]
+[ext_resource path="res://actors/CharacterProfiles/Doom.tres" type="Resource" id=8]
+[ext_resource path="res://actors/abstract/Enemy.gd" type="Script" id=9]
+[ext_resource path="res://actors/CharacterProfiles/BL2.tres" type="Resource" id=10]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 3 )
@@ -20,11 +23,15 @@ normal_texture = ExtResource( 4 )
 uv1_scale = Vector3( 0.25, 0.25, 0.25 )
 uv1_triplanar = true
 
-[sub_resource type="Environment" id=5]
+[sub_resource type="Environment" id=2]
+background_energy = 0.1
 fog_enabled = true
-fog_color = Color( 0.12549, 0.12549, 0.12549, 1 )
+fog_color = Color( 0.0705882, 0.0431373, 0, 1 )
 fog_sun_color = Color( 1, 0.901961, 0.701961, 1 )
+fog_depth_begin = 15.0
+fog_depth_end = 85.0
 fog_transmit_enabled = true
+fog_transmit_curve = 1.5
 tonemap_mode = 2
 tonemap_exposure = 2.0
 tonemap_white = 4.0
@@ -36,11 +43,21 @@ glow_intensity = 1.2
 glow_strength = 1.15
 glow_bloom = 0.11
 
-[sub_resource type="CubeMesh" id=6]
+[sub_resource type="CubeMesh" id=3]
 
-[sub_resource type="SpatialMaterial" id=7]
+[sub_resource type="SpatialMaterial" id=4]
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 0.5, 0.5, 0.5 )
+
+[sub_resource type="CubeMesh" id=6]
+size = Vector3( 1, 1, 1 )
 
 [node name="Spatial" type="Spatial"]
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 22 )
+character_profile = ExtResource( 8 )
 
 [node name="Room" type="CSGCombiner" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6 )
@@ -87,29 +104,26 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 2, 0 )
 [node name="Torch2" parent="Room" instance=ExtResource( 1 )]
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 12, 2, 0 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 22 )
-
 [node name="Hallway" type="CSGCombiner" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -29 )
 material_override = SubResource( 1 )
 use_collision = true
 collision_mask = 0
 
 [node name="CSGBox" type="CSGBox" parent="Hallway"]
 width = 12.0
-height = 12.0
-depth = 48.0
+height = 14.0
+depth = 26.0
 
 [node name="CSGBox2" type="CSGBox" parent="Hallway"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 operation = 2
 width = 10.0
-height = 8.0
-depth = 52.0
+height = 10.0
+depth = 30.485
 
 [node name="X4" type="CSGCombiner" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -88 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -66 )
 material_override = SubResource( 1 )
 use_collision = true
 collision_mask = 0
@@ -155,13 +169,28 @@ transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -0.050003
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5, -88.2531 )
 
 [node name="Dungeon" type="WorldEnvironment" parent="."]
-environment = SubResource( 5 )
+environment = SubResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 visible = false
-mesh = SubResource( 6 )
-material/0 = SubResource( 7 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
 
 [node name="OmniLight" type="OmniLight" parent="MeshInstance"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0 )
 omni_range = 5.7
+
+[node name="Enemy" type="KinematicBody" parent="." groups=[
+"Enemy",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -86 )
+script = ExtResource( 9 )
+character_profile = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Enemy"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56692, 0 )
+shape = SubResource( 5 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Enemy"]
+mesh = SubResource( 6 )
+material/0 = null

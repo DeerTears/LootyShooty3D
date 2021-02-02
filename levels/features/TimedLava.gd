@@ -1,32 +1,30 @@
 extends Area
-var total = 0.0
-export (int) var damage = 5
-export (float) var sustain_time = 1.0
-var lava_active: bool = false
-var body_on_lava: bool = false
-var last_body
+export (int) var damage = 5 # damage dealt to bodies
+export (float) var damage_sustain_time = 1.0 # interval between hurt() calls
+export (bool) var lava_active: bool = false # used to track if the lava has stopped flashing or not
+
+var last_body = null # used to track if the player is still on the lava when it re-flashes
 
 func _ready():
-	total = 0.0
+	$HurtTimer.wait_time = damage_sustain_time
 
 func on_body_entered(body):
-	if body.is_in_group("Player") == false:
+	if body.is_in_group("Player") or body.is_in_group("Enemy"):
+		last_body = body
+		hurt_last_body()
+
+func on_body_exited(body):
+	if body == last_body:
+		last_body = null
+	print("exited | body: %s, last body: %s" % [body, last_body])
+
+func hurt_last_body():
+	print(last_body)
+	if last_body == null:
 		return
-	body_on_lava = true
-	while overlaps_body(body) and lava_active:
-		body.hurt(damage)
-#		last_body = body
+	while overlaps_body(last_body) and lava_active:
+		last_body.hurt(damage)
 		$HurtTimer.start()
 		yield($HurtTimer,"timeout")
-
-func _process(delta):
-	total += delta # lazy sin timer
-	var result = sin(total/1.9)
-	result = clamp(result,0.0,0.85) # don't make the lava weird looking
-	if result >= 0.225:
-		lava_active = true
-#		if last_body != null:
-#			on_body_entered(last_body)
-	else:
-		lava_active = false
-	$MeshInstance.material_override.set_shader_param("emission_energy", result)
+		if last_body == null:
+			return

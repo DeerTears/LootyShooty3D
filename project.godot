@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/abstract/Actor.gd"
 }, {
+"base": "Resource",
+"class": "CharacterProfile",
+"language": "GDScript",
+"path": "res://actors/CharacterProfiles/CharacterProfile.gd"
+}, {
 "base": "Actor",
 "class": "Enemy",
 "language": "GDScript",
@@ -46,6 +51,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Actor": "",
+"CharacterProfile": "",
 "Enemy": "",
 "EnemyMelee": "",
 "Weapon": "",

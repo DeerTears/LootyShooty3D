@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://actors/CharacterProfiles/CharacterProfile.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+health = 100
+max_health = 100
+speed = 22.0
+jump = 5.0
+air_acceleration = 1.0
+default_acceleration = 20.0
+gravity = 50.0

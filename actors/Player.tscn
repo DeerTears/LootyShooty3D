@@ -226,6 +226,7 @@ shape = SubResource( 9 )
 
 [node name="ShootSMG" type="AudioStreamPlayer" parent="Sounds/Guns"]
 volume_db = -2.0
+bus = "PlayerGuns"
 script = ExtResource( 5 )
 streams = [ ExtResource( 9 ), ExtResource( 10 ) ]
 random_strategy = 0

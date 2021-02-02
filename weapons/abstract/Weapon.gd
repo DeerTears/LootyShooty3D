@@ -8,7 +8,7 @@ var bullet_emitter_path = "res://weapons/components/BulletEmitter.tscn"
 var firerate: float = 0.1 # represents current gun's firerate
 var swap_time: float = 1.0 # represents current gun's pull-out time
 
-func shoot(): # refactor opportunity: make this function an inheritable behaviour inherited optionally by each gun. though I wonder, for what purpose would that be useful? melee?
+func shoot(): # refactor?: make this function an inheritable behaviour inherited optionally by each gun. though I wonder, for what purpose would that be useful? melee?
 	var child_count = get_child_count()
 	if child_count == 1:
 		get_child(0).shoot()

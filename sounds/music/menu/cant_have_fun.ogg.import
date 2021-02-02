@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/cant_have_fun.ogg-25a7636905b5cb024dba0d595718bbd7.oggstr"
+
+[deps]
+
+source_file="res://sounds/music/menu/cant_have_fun.ogg"
+dest_files=[ "res://.import/cant_have_fun.ogg-25a7636905b5cb024dba0d595718bbd7.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
