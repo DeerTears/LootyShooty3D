@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://levels/features/Torch.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/Player.tscn" type="PackedScene" id=2]
@@ -10,6 +10,11 @@
 [ext_resource path="res://actors/CharacterProfiles/Doom.tres" type="Resource" id=8]
 [ext_resource path="res://actors/abstract/Enemy.gd" type="Script" id=9]
 [ext_resource path="res://actors/CharacterProfiles/BL2.tres" type="Resource" id=10]
+[ext_resource path="res://materials/Snow/snow.material" type="Material" id=11]
+[ext_resource path="res://environments/Environment.gd" type="Script" id=14]
+[ext_resource path="res://materials/Dungeon/Stonewall/Albedo.png" type="Texture" id=15]
+[ext_resource path="res://materials/Dungeon/Stonewall/RoughnessMaybe.png" type="Texture" id=17]
+[ext_resource path="res://materials/Dungeon/Stonewall/Normal.png" type="Texture" id=18]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 3 )
@@ -23,7 +28,22 @@ normal_texture = ExtResource( 4 )
 uv1_scale = Vector3( 0.25, 0.25, 0.25 )
 uv1_triplanar = true
 
-[sub_resource type="Environment" id=2]
+[sub_resource type="SpatialMaterial" id=2]
+params_diffuse_mode = 3
+params_specular_mode = 3
+albedo_texture = ExtResource( 15 )
+metallic = 0.53
+metallic_specular = 1.0
+metallic_texture = ExtResource( 17 )
+roughness = 0.6
+roughness_texture = ExtResource( 17 )
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = ExtResource( 18 )
+uv1_scale = Vector3( 0.125, 0.125, 0.125 )
+uv1_triplanar = true
+
+[sub_resource type="Environment" id=3]
 background_energy = 0.1
 fog_enabled = true
 fog_color = Color( 0.0705882, 0.0431373, 0, 1 )
@@ -43,15 +63,15 @@ glow_intensity = 1.2
 glow_strength = 1.15
 glow_bloom = 0.11
 
-[sub_resource type="CubeMesh" id=3]
-
-[sub_resource type="SpatialMaterial" id=4]
-
-[sub_resource type="BoxShape" id=5]
+[sub_resource type="BoxShape" id=6]
 extents = Vector3( 0.5, 0.5, 0.5 )
 
-[sub_resource type="CubeMesh" id=6]
+[sub_resource type="CubeMesh" id=7]
 size = Vector3( 1, 1, 1 )
+
+[sub_resource type="CubeMesh" id=9]
+material = ExtResource( 11 )
+size = Vector3( 40, 2, 40 )
 
 [node name="Spatial" type="Spatial"]
 
@@ -64,6 +84,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6 )
 material_override = ExtResource( 6 )
 use_collision = true
 collision_mask = 0
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="Body" type="CSGBox" parent="Room"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
@@ -104,11 +128,70 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 2, 0 )
 [node name="Torch2" parent="Room" instance=ExtResource( 1 )]
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 12, 2, 0 )
 
+[node name="Room2" type="CSGCombiner" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -72, 0, -67 )
+material_override = ExtResource( 6 )
+use_collision = true
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Body" type="CSGBox" parent="Room2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+width = 30.0
+height = 18.0
+depth = 44.0
+
+[node name="Doors" type="CSGBox" parent="Room2"]
+operation = 2
+width = 10.0
+height = 6.0
+depth = 50.0
+
+[node name="Interior" type="CSGBox" parent="Room2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+operation = 2
+width = 24.0
+height = 12.0
+depth = 40.0
+
+[node name="Detail3" type="CSGBox" parent="Room2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9 )
+operation = 2
+width = 26.0
+height = 4.0
+depth = 10.0
+
+[node name="Detail2" type="CSGBox" parent="Room2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9 )
+operation = 2
+width = 26.0
+height = 4.0
+depth = 10.0
+
+[node name="Torch" parent="Room2" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 2, -15 )
+
+[node name="Torch2" parent="Room2" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 12, 2, -15 )
+
+[node name="Torch3" parent="Room2" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 2, 15 )
+
+[node name="Torch4" parent="Room2" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 12, 2, 15 )
+
 [node name="Hallway" type="CSGCombiner" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -29 )
 material_override = SubResource( 1 )
 use_collision = true
 collision_mask = 0
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="CSGBox" type="CSGBox" parent="Hallway"]
 width = 12.0
@@ -122,11 +205,59 @@ width = 10.0
 height = 10.0
 depth = 30.485
 
+[node name="Hallway2" type="CSGCombiner" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 37, 0, -67 )
+material_override = SubResource( 1 )
+use_collision = true
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CSGBox" type="CSGBox" parent="Hallway2"]
+width = 12.0
+height = 14.0
+depth = 26.0
+
+[node name="CSGBox2" type="CSGBox" parent="Hallway2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+operation = 2
+width = 10.0
+height = 10.0
+depth = 30.485
+
+[node name="Hallway3" type="CSGCombiner" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -37, 0, -67 )
+material_override = SubResource( 1 )
+use_collision = true
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CSGBox" type="CSGBox" parent="Hallway3"]
+width = 12.0
+height = 14.0
+depth = 26.0
+
+[node name="CSGBox2" type="CSGBox" parent="Hallway3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+operation = 2
+width = 10.0
+height = 10.0
+depth = 30.485
+
 [node name="X4" type="CSGCombiner" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -66 )
 material_override = SubResource( 1 )
 use_collision = true
 collision_mask = 0
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="CSGBox" type="CSGBox" parent="X4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0 )
@@ -142,9 +273,10 @@ height = 18.0
 depth = 44.0
 
 [node name="Inside2" type="CSGBox" parent="X4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 operation = 2
 width = 6.0
-height = 6.0
+height = 10.0
 depth = 52.0
 
 [node name="Inside3" type="CSGBox" parent="X4"]
@@ -160,25 +292,64 @@ depth = 52.0
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 21.9, 4, 0 )
 
 [node name="Torch3" parent="X4" instance=ExtResource( 1 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0500031, 4, 21.95 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0500031, 10, 21.95 )
 
 [node name="Torch4" parent="X4" instance=ExtResource( 1 )]
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -0.0500031, 10, -21.95 )
+
+[node name="X6" type="CSGCombiner" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 74, 0, -66 )
+material_override = SubResource( 2 )
+use_collision = true
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CSGBox" type="CSGBox" parent="X6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0 )
+width = 48.0
+height = 24.0
+depth = 48.0
+
+[node name="Inside" type="CSGBox" parent="X6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0 )
+operation = 2
+width = 44.0
+height = 18.0
+depth = 44.0
+
+[node name="Inside2" type="CSGBox" parent="X6"]
+operation = 2
+width = 6.0
+height = 6.0
+depth = 52.0
+
+[node name="Inside3" type="CSGBox" parent="X6"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
+operation = 2
+width = 6.0
+height = 6.0
+depth = 52.0
+
+[node name="Torch" parent="X6" instance=ExtResource( 1 )]
+
+[node name="Torch2" parent="X6" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 21.9, 4, 0 )
+
+[node name="Torch3" parent="X6" instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0500031, 4, 21.95 )
+
+[node name="Torch4" parent="X6" instance=ExtResource( 1 )]
 transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -0.0500031, 4, -21.95 )
 
 [node name="TimedLava2" parent="." instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5, -88.2531 )
 
 [node name="Dungeon" type="WorldEnvironment" parent="."]
-environment = SubResource( 2 )
-
-[node name="MeshInstance" type="MeshInstance" parent="."]
-visible = false
-mesh = SubResource( 3 )
-material/0 = SubResource( 4 )
-
-[node name="OmniLight" type="OmniLight" parent="MeshInstance"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0 )
-omni_range = 5.7
+environment = SubResource( 3 )
+script = ExtResource( 14 )
 
 [node name="Enemy" type="KinematicBody" parent="." groups=[
 "Enemy",
@@ -189,8 +360,22 @@ character_profile = ExtResource( 10 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Enemy"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56692, 0 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Enemy"]
-mesh = SubResource( 6 )
+mesh = SubResource( 7 )
 material/0 = null
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.86597, 0 )
+mesh = SubResource( 9 )
+material/0 = null
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, 0 )
+omni_range = 15.0
+
+[node name="OmniLight2" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2997, 13, 14.4695 )
+light_color = Color( 0.411765, 0.737255, 1, 1 )
+omni_range = 15.0

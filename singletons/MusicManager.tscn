@@ -3,7 +3,7 @@
 [ext_resource path="res://sounds/music/menu/cant_have_fun.ogg" type="AudioStream" id=1]
 [ext_resource path="res://sounds/music/fight/hit_em_around.ogg" type="AudioStream" id=2]
 
-[node name="Node" type="Node"]
+[node name="Node(NotDone)" type="Node"]
 
 [node name="Music" type="Node" parent="."]
 
@@ -12,15 +12,15 @@ stream = ExtResource( 2 )
 volume_db = -20.0
 bus = "Music"
 
-[node name="Overworld" type="AudioStreamPlayer" parent="Music"]
+[node name="Overworld(NotDone)" type="AudioStreamPlayer" parent="Music"]
 
 [node name="Menu" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource( 1 )
 volume_db = -20.0
 bus = "Music"
 
-[node name="GlobalSounds" type="Node" parent="."]
+[node name="GlobalSounds(NotDone)" type="Node" parent="."]
 
-[node name="Select" type="AudioStreamPlayer" parent="GlobalSounds"]
+[node name="Select" type="AudioStreamPlayer" parent="GlobalSounds(NotDone)"]
 
-[node name="Hover" type="AudioStreamPlayer" parent="GlobalSounds"]
+[node name="Hover" type="AudioStreamPlayer" parent="GlobalSounds(NotDone)"]

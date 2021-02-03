@@ -1,3 +1,4 @@
+# ALL CODE IS SPAGHETTI CODE
 extends Spatial
 class_name Weapon # an abstract weapon class that other WeaponClasses (WeaponPistol, WeaponSMG, etc.) refer to, using the strategy pattern
 
@@ -31,13 +32,20 @@ func update_firerate(time:float): # all guns share one firerate timer
 func update_swap_time(time:float): # all guns share one weapon swap timer
 	swap_time = time
 
-# BUG: UPDATE_PELLET_COUNT() NEEDS TO COME BEFORE UPDATE_DAMAGE()
+# UPDATE_PELLET_COUNT() NEEDS TO COME BEFORE UPDATE_DAMAGE()
 # otherwise BulletEmitters will deal the default of 1 damage
 
 func update_pellet_count(pellets:int): # adds BulletEmitter children to the WeaponClass that called for it, based on the passed pellet count
+	var old_child_count = get_child_count()
+#	print("old child count: %s" % [old_child_count])
+	for i in old_child_count:
+		var backwards_index = old_child_count - i - 1
+		get_child(backwards_index).queue_free()
+	yield(get_tree(),"idle_frame")
+	print("I think it worked? We should have %s children now." % [get_child_count()])
 	pellet_count = pellets
 	var pellets_array = get_pellets()
-	print("old child count: %s" % [get_child_count()])
+	# its cute when ur excited
 	for i in pellets_array.size():
 		add_child(pellets_array[i],true)
 		print("now serving %s" % [get_child(i).name])

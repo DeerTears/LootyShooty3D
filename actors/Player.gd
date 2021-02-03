@@ -2,7 +2,9 @@ extends Actor
 
 # selecting and picking guns
 
-var new_item_selected
+var new_gun_selected
+var new_gun_resource
+var selecting_gun
 
 # character controller
 var horizontal_acceleration = 3
@@ -13,7 +15,7 @@ var jump = 18
 var full_contact = false
 var alive: bool = true
 
-onready var pickup_notice = $HUD/CenterContainer/PickupNotice
+onready var hud_pickup_notice = $HUD/CenterContainer/PickupNotice
 export var mouse_sensitivity = 0.15
 
 var horizontal_velocity = Vector3()
@@ -24,7 +26,7 @@ onready var ground_check = $GroundCheck
 func _ready():
 	speed = 22
 	$Mesh/EditorArrow.hide()
-	$HUD/CenterContainer/PickupNotice.hide()
+	hud_pickup_notice.hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if character_profile == null:
 		print("no character profile!")
@@ -39,15 +41,17 @@ func _ready():
 
 func _on_PickupArea_body_entered(body):
 	if "gun_resource" in body:
-		new_item_selected = body
-		var new_gun_resource = new_item_selected.gun_resource
-		pickup_notice.show() # refactor: move notice to not be in the dead middle of the screen
-		pickup_notice.get_child(0).text = "press 'E' to pickup %s" % [new_gun_resource.name]
-		# todo: have this result update our WeaponHandler's gun_resource for its current slot
+		new_gun_selected = body
+		new_gun_resource = new_gun_selected.gun_resource
+		hud_pickup_notice.show() # refactor: move notice to not be in the dead middle of the screen
+		hud_pickup_notice.get_child(0).text = "press 'E' to pickup %s" % [new_gun_resource.name]
+		selecting_gun = true
+		# todo: have this result update our WeaponSlotsHandler's gun_resource for its current slot
 
 func _on_PickupArea_body_exited(body):
 	if "gun_resource" in body:
-		pickup_notice.hide()
+		hud_pickup_notice.hide()
+		selecting_gun = false
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -61,8 +65,16 @@ func _input(event):
 			OS.window_fullscreen = true
 	if not alive:
 		return
+	if event.is_action_pressed("use") and selecting_gun:
+		pickup_gun()
 	if event.is_action_pressed("drop"):
 		drop_gun()
+
+func pickup_gun():
+	var current_slot = $Head/WeaponSlotsHandler.slot_idx
+	print("old: %s" % [$Head/WeaponSlotsHandler/Slots.get_child(current_slot).get_gun_resource()])
+	$Head/WeaponSlotsHandler/Slots.get_child(current_slot).set_gun_resource(new_gun_resource)
+	print("new: %s" % [$Head/WeaponSlotsHandler/Slots.get_child(current_slot).get_gun_resource()])
 
 func drop_gun():
 	var new_gun = load("res://weapons/components/ItemBody.tscn").instance()
@@ -109,9 +121,6 @@ func _physics_process(delta):
 	move_and_slide(velocity, Vector3.UP)
 	GameInfo.player_position = global_transform.origin
 
-
-# todo: decouple animations and viewmodels from weapon slot
-# instead have it refer to the gun_resource guntype?
 func on_weapon_fired(weapon_name:String,_total_time_for_animation_to_complete:float):
 	$Head/Camera/Animations.playback_speed = 1.0
 	match weapon_name:

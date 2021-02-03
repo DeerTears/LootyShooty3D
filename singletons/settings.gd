@@ -1,20 +1,45 @@
 extends Node
 
 var volume = {
-	"master":0.0,
-	"music":0.0,
-	"voices":0.0,
-	"guns":0.0,
-	"footsteps":0.0,
-	"ambient":0.0,
-	"ui":0.0,
+	"Master":0.0,
+	"Reverb":0.0,
+	"PlayerGuns":0.0,
+	"EnemyBarks":0.0,
+	"EnemyGuns":0.0,
+	"Footsteps":0.0,
+	"Ambient":0.0,
+	"Music":0.0,
+	"UI":0.0,
 }
 
-enum quality {
+enum {
 	HIGH,
 	MEDIUM,
 	LOW,
-	CUSTOM,
 }
 
-var graphics_quality
+func _ready():
+	yield(get_tree().create_timer(2.0),"timeout")
+	print("update glow?")
+	update_graphics_property("glow", LOW)
+
+func update_graphics_property(property, level):
+	match property:
+		"glow":
+			match level:
+				HIGH:
+					get_tree().call_group("Environment", "set_glow_enabled", true)
+				MEDIUM:
+					get_tree().call_group("Environment", "set_glow_enabled", true)
+				LOW:
+					print("mhm")
+					get_tree().call_group("Environment", "set_glow_enabled", false)
+					#why not?
+		"shadows":
+			match level:
+				HIGH:
+					pass
+				MEDIUM:
+					pass
+				LOW:
+					pass

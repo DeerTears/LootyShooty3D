@@ -1,6 +1,8 @@
 extends Spatial
 class_name WeaponSlot
 
+signal gun_resource_changed
+
 # WeaponSlot contains a Weapon, and a gun_resource.
 # WeaponSlots pass their gun_resource parameters to the sole Weapon child they're responsible for.
 # This Weapon can then be fired through this WeaponSlot's "shoot" method.
@@ -35,8 +37,11 @@ func get_gun_resource() -> Resource:
 
 func clear_gun_resource():
 	gun_resource = load("res://weapons/saved/inventory_placeholder.tres")
+	emit_signal("gun_resource_changed")
 
-#func swap_gun_resource(new_gun:Resource): # might not work, don't touch for a bit
-#	var return_gun = gun_resource
-#	gun_resource = new_gun
-#	return return_gun
+func swap_gun_resource(new_gun:Resource): # haven't tested juust yet
+	var old_gun = gun_resource
+	gun_resource = new_gun
+	set_gun_resource(new_gun)
+	emit_signal("gun_resource_changed")
+	return old_gun
