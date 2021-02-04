@@ -15,6 +15,7 @@ const weapon_names = [ # our suffixes for each WeaponClass class, dynamically us
 	"Shotgun", # 3
 	"Sniper", # 4
 ] # same order as in /weapons/meta.gd
+var current_guntype
 
 onready var firerate_timer = $FirerateTimer # All slots share a firerate timer, use update_firerate through WeaponSlot at runtime to change this.
 onready var swap_timer = $SwapTimer # same goes for the weapon swap timer, use update_swaptime in a WeaponSlot to change the swap time for the weapon it's responsible for.
@@ -22,13 +23,10 @@ onready var swap_timer = $SwapTimer # same goes for the weapon swap timer, use u
 func _ready():
 	update_inventory_size()
 	active_weapon = get_node("Slots/WeaponSlot0/Weapon")
+	current_guntype = $Slots.get_child(slot_idx).gun_resource.guntype
 	update_timers()
 	start_swap_timer()
 	emit_signal("swapped","Pistol", active_weapon.swap_time)
-	pick_random_weapons()
-
-func pick_random_weapons():
-	pass
 
 func update_inventory_size():
 	inventory_size = $Slots.get_child_count()
@@ -37,7 +35,7 @@ func update_inventory_size():
 
 func on_gun_resource_changed():
 	active_weapon = get_node("Slots/WeaponSlot%s/Weapon" % [slot_idx])
-	var current_guntype = $Slots.get_child(slot_idx).gun_resource.guntype
+	current_guntype = $Slots.get_child(slot_idx).gun_resource.guntype
 	update_timers()
 	start_swap_timer()
 	emit_signal("swapped", weapon_names[current_guntype], swap_timer.wait_time)
@@ -70,6 +68,7 @@ func _input(event):
 	
 	if old_slot_idx != slot_idx:
 		active_weapon = get_node("Slots/WeaponSlot%s/Weapon" % [slot_idx])
+		current_guntype = $Slots.get_child(slot_idx).gun_resource.guntype
 		update_timers()
 		start_swap_timer()
 
@@ -79,7 +78,6 @@ func update_timers():
 	firerate_timer.wait_time = active_weapon.firerate
 
 func start_swap_timer():
-	var current_guntype = $Slots.get_child(slot_idx).gun_resource.guntype
 	emit_signal("swapped", weapon_names[current_guntype], swap_timer.wait_time)
 	print_debug("swapped to %s" % [active_weapon.get_parent().gun_resource.name])
 	swap_timer.start()
@@ -89,5 +87,5 @@ func _physics_process(_delta):
 	if Input.is_action_pressed("fire") and firerate_timer.is_stopped() and swap_timer.is_stopped():
 			active_weapon.shoot()
 			firerate_timer.start()
-			emit_signal("fired", weapon_names[slot_idx], firerate_timer.wait_time)
+			emit_signal("fired", weapon_names[current_guntype], firerate_timer.wait_time)
 	$Panel/Label.text = "%s\n%s" % [firerate_timer.time_left, swap_timer.time_left]

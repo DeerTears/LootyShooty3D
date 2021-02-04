@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://control/menus/clouds.shader" type="Shader" id=1]
 [ext_resource path="res://control/menus/main.theme" type="Theme" id=2]
+[ext_resource path="res://control/themes/fonts/header1.tres" type="DynamicFont" id=3]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -52,52 +53,53 @@ custom_constants/separation = 16
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
 margin_right = 960.0
-margin_bottom = 28.0
+margin_bottom = 61.0
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 953.0
-margin_bottom = 21.0
+margin_bottom = 54.0
+custom_fonts/font = ExtResource( 3 )
 text = "LootyShooty3D"
 align = 1
 valign = 1
 
 [node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
-margin_top = 44.0
+margin_top = 77.0
 margin_right = 960.0
-margin_bottom = 78.0
+margin_bottom = 130.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer2"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 953.0
-margin_bottom = 27.0
+margin_bottom = 46.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer2/HBoxContainer"]
-margin_top = 3.0
-margin_right = 892.0
-margin_bottom = 17.0
+margin_top = 8.0
+margin_right = 875.0
+margin_bottom = 31.0
 size_flags_horizontal = 3
 text = "Version 0.0: First build"
 
 [node name="About" type="Button" parent="MarginContainer/VBoxContainer/PanelContainer2/HBoxContainer"]
-margin_left = 896.0
+margin_left = 879.0
 margin_right = 946.0
-margin_bottom = 20.0
+margin_bottom = 39.0
 text = "About"
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
-margin_top = 94.0
+margin_top = 146.0
 margin_right = 960.0
-margin_bottom = 98.0
+margin_bottom = 150.0
 
 [node name="Grid" type="GridContainer" parent="MarginContainer/VBoxContainer"]
 margin_left = 356.0
-margin_top = 114.0
+margin_top = 166.0
 margin_right = 604.0
 margin_bottom = 536.0
 size_flags_horizontal = 4
@@ -107,24 +109,24 @@ custom_constants/hseparation = 16
 
 [node name="Romp" type="Button" parent="MarginContainer/VBoxContainer/Grid"]
 margin_right = 248.0
-margin_bottom = 130.0
+margin_bottom = 112.0
 rect_min_size = Vector2( 248, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Start"
 
 [node name="Settings" type="Button" parent="MarginContainer/VBoxContainer/Grid"]
-margin_top = 146.0
+margin_top = 128.0
 margin_right = 248.0
-margin_bottom = 276.0
+margin_bottom = 240.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Settings"
 
 [node name="Quit" type="Button" parent="MarginContainer/VBoxContainer/Grid"]
-margin_top = 292.0
+margin_top = 256.0
 margin_right = 248.0
-margin_bottom = 422.0
+margin_bottom = 368.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Quit"

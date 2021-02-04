@@ -2,6 +2,7 @@ extends Actor
 
 # selecting and picking guns
 
+var current_slot_gun_resource = preload("res://weapons/saved/inventory_placeholder.tres")
 var new_gun_selected
 var new_gun_resource
 var selecting_gun
@@ -67,6 +68,7 @@ func _input(event):
 		return
 	if event.is_action_pressed("use") and selecting_gun:
 		pickup_gun()
+		new_gun_selected.queue_free()
 	if event.is_action_pressed("drop"):
 		drop_gun()
 
@@ -80,7 +82,10 @@ func drop_gun():
 	var new_gun = load("res://weapons/components/ItemBody.tscn").instance()
 	new_gun.global_transform = self.global_transform
 	new_gun.drop_trajectory = -transform.basis.z
-	new_gun.gun_resource = load(meta.gunlist[randi() % meta.gunlist.size() - 1])
+	if selecting_gun:
+		new_gun.gun_resource = new_gun_resource
+	if not selecting_gun:
+		new_gun.gun_resource = current_slot_gun_resource
 	get_tree().root.add_child(new_gun)
 
 func _hurt(): # hurt() is still in tact in actor.gd

@@ -95,7 +95,7 @@ light_color = Color( 1, 0.639216, 0.215686, 1 )
 light_indirect_energy = 2.0
 shadow_enabled = true
 shadow_bias = 0.55
-omni_range = 20.0
+omni_range = 18.0
 omni_attenuation = 3.0
 
 [node name="Beam" type="MeshInstance" parent="."]

@@ -124,24 +124,24 @@ tracks/1/keys = {
 "values": [ Vector3( -0.024, 0.109, -0.157 ), Vector3( 0, 0, 0.1 ), Vector3( 0, 0, 0.05 ), Vector3( 0, 0, 0 ) ]
 }
 
-[sub_resource type="SphereShape" id=10]
+[sub_resource type="SphereShape" id=5]
 radius = 5.0
 
-[sub_resource type="CapsuleMesh" id=5]
+[sub_resource type="CapsuleMesh" id=6]
 mid_height = 3.0
 
-[sub_resource type="SpatialMaterial" id=11]
+[sub_resource type="SpatialMaterial" id=7]
 
-[sub_resource type="PrismMesh" id=6]
-material = SubResource( 11 )
+[sub_resource type="PrismMesh" id=8]
+material = SubResource( 7 )
 size = Vector3( 2, 2, 0.5 )
 
-[sub_resource type="CapsuleShape" id=7]
+[sub_resource type="CapsuleShape" id=9]
 height = 3.0
 
-[sub_resource type="CylinderShape" id=8]
+[sub_resource type="CylinderShape" id=10]
 
-[sub_resource type="CylinderShape" id=9]
+[sub_resource type="CylinderShape" id=11]
 radius = 3.0
 height = 8.0
 
@@ -207,26 +207,26 @@ visible = false
 [node name="PickArea" type="Area" parent="Head/WeaponPicker_WIP"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Head/WeaponPicker_WIP/PickArea"]
-shape = SubResource( 10 )
+shape = SubResource( 5 )
 
 [node name="Mesh" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
 cast_shadow = 0
-mesh = SubResource( 5 )
+mesh = SubResource( 6 )
 material/0 = null
 
 [node name="EditorArrow" type="MeshInstance" parent="Mesh"]
 transform = Transform( 1, 0, 0, 0, -0.996195, 0.0871554, 0, -0.0871554, -0.996195, 0, -3, -1 )
-mesh = SubResource( 6 )
+mesh = SubResource( 8 )
 material/0 = null
 
 [node name="CollisionBody" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-shape = SubResource( 7 )
+shape = SubResource( 9 )
 
 [node name="CollisionFoot" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0 )
-shape = SubResource( 8 )
+shape = SubResource( 10 )
 
 [node name="PickupArea" type="Area" parent="."]
 collision_layer = 0
@@ -234,7 +234,7 @@ collision_mask = 4
 
 [node name="CollisionShape" type="CollisionShape" parent="PickupArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-shape = SubResource( 9 )
+shape = SubResource( 11 )
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]
 

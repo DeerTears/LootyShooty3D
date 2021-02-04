@@ -3,6 +3,8 @@ export (int) var damage = 5 # damage dealt to bodies
 export (float) var damage_sustain_time = 1.0 # interval between hurt() calls
 export (bool) var lava_active: bool = false # used to track if the lava has stopped flashing or not
 
+# bug: any body exits and all references to bodies are lost
+# fix: replace below Node variable with an Array to hold nodes
 var last_body = null # used to track if the player is still on the lava when it re-flashes
 
 func _ready():
@@ -19,7 +21,6 @@ func on_body_exited(body):
 	print("exited | body: %s, last body: %s" % [body, last_body])
 
 func hurt_last_body():
-	print(last_body)
 	if last_body == null:
 		return
 	while overlaps_body(last_body) and lava_active:
