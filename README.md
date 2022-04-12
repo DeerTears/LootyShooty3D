@@ -1,10 +1,14 @@
-# LootyShooty3D
+# LootyShooty3D (DEAD)
+
+General notice: this game's codebase is unmaintainable for me to continue. For what is not attributed below, you are free to use this code how you please, if you find it useful to copy or study.
 
 "Texture Pack: Photoscanned 01" (https://juliovii.itch.io/pspk01) by JulioVII is licensed under Creative Commons Attribution 2.0 Generic (https://creativecommons.org/licenses/by/2.0/).
 
 "Low Poly Weapons" (https://skfb.ly/6RwMM) by Gunnar Correa is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 
 There's also pacdev's low-poly CC0 gunpack that I used for this project: https://pacdev.itch.io/lowpoly-weapon
+
+Sound effects come from various https://ben-burnes.gumroad.com/ CC0 packs.
 
 # Overview of Folders and Contents
 
