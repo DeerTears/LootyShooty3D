@@ -1,6 +1,6 @@
 # LootyShooty3D (DEAD)
 
-**This game's codebase is unmaintainable for me to continue.** For what is not attributed below, you are free to use this project's source how you please, if you find it useful to copy or study.
+**This game's codebase is unmaintainable for me. I will not continue development or accept PRs.** For what is not attributed below, you are free to use this project's source how you please, if you find it useful to copy or study.
 
 # Attributions
 
