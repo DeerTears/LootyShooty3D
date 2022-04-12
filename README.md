@@ -1,6 +1,8 @@
 # LootyShooty3D (DEAD)
 
-General notice: this game's codebase is unmaintainable for me to continue. For what is not attributed below, you are free to use this code how you please, if you find it useful to copy or study.
+**This game's codebase is unmaintainable for me to continue.** For what is not attributed below, you are free to use this project's source how you please, if you find it useful to copy or study.
+
+# Attributions
 
 "Texture Pack: Photoscanned 01" (https://juliovii.itch.io/pspk01) by JulioVII is licensed under Creative Commons Attribution 2.0 Generic (https://creativecommons.org/licenses/by/2.0/).
 
